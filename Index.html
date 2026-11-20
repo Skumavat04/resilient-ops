@@ -1,0 +1,1559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#E4002B">
+<title>The Path to Resilient Operations | Live Voting | Honeywell Technologies</title>
+<style>
+:root{--red:#E4002B;--red-d:#B8001F;--red-s:#FDECEF;--ink:#121826;--ink2:#3B4352;--mut:#6B7385;--line:#E4E7EC;--bg:#F3F5F8;--navy:#0E1726;--navy2:#1B2638;--gold:#C9A227;--silver:#8E99A8;--bronze:#B0703C;--ok:#0F8A5F;--sh:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06)}
+*{box-sizing:border-box}html,body{margin:0}body{font-family:"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit}.hidden{display:none!important}
+.logo{display:inline-block;line-height:1}.logo b{display:block;font-weight:800;color:var(--red);letter-spacing:-.6px;font-size:28px}.logo small{display:block;font-size:10px;letter-spacing:2.6px;text-transform:uppercase;color:var(--mut);font-weight:700;margin-top:3px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:var(--red-s);color:var(--red-d)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.6s infinite}.off .dot{background:#9AA3B2;animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(228,0,43,.55)}70%{box-shadow:0 0 0 10px rgba(228,0,43,0)}100%{box-shadow:0 0 0 0 rgba(228,0,43,0)}}
+.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:13px;text-decoration:none}
+.bp{background:var(--red);color:#fff}.bp:hover{background:var(--red-d)}.bp:disabled{background:#E8A3B0;cursor:not-allowed}
+.bg{background:#fff;color:var(--ink2);border:1px solid var(--line)}.bg:hover{border-color:#C5CBD5}.bg.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid rgba(228,0,43,.35);outline-offset:2px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh)}
+.mut{color:var(--mut)}
+/* ===== PROJECTOR ===== */
+#P{min-height:100vh;display:flex;flex-direction:column}
+.top{background:#fff;border-bottom:1px solid var(--line);padding:14px 28px;display:flex;align-items:center;gap:22px}
+.vr{width:1px;height:40px;background:var(--line)}
+.top h1{margin:0;font-size:22px;letter-spacing:-.3px}.top p{margin:3px 0 0;font-size:13px;color:var(--mut)}
+.stats{margin-left:auto;display:flex;gap:10px;align-items:center}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:7px 14px;text-align:right;min-width:104px}
+.stat b{display:block;font-size:22px;line-height:1.1;font-variant-numeric:tabular-nums}.stat span{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.conn{font-size:12px;color:var(--mut);display:flex;align-items:center;gap:6px}
+.clock{font-weight:600;color:var(--ink2);min-width:64px;text-align:right;font-variant-numeric:tabular-nums}
+.wrap{flex:1;display:grid;grid-template-columns:330px 1fr;gap:22px;padding:22px 28px}
+.side{display:flex;flex-direction:column;gap:18px}
+.qrc{padding:22px;text-align:center;position:relative;overflow:hidden}.qrc:before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--red)}
+.qrc h2{margin:6px 0 2px;font-size:20px}.qrc .hint{color:var(--mut);font-size:13px;margin:0 0 14px}
+.seg{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px;margin-bottom:14px}
+.seg button{border:0;background:transparent;padding:7px 12px;border-radius:8px;font-weight:700;font-size:12px;color:var(--mut);cursor:pointer}.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.qrbox{width:100%;max-width:250px;margin:0 auto;aspect-ratio:1;border-radius:14px;padding:10px;background:#fff;border:1px solid var(--line)}.qrbox svg{width:100%;height:100%;display:block}
+.qrurl{margin-top:12px;font-family:Consolas,monospace;font-size:12px;color:var(--ink2);word-break:break-all;background:var(--bg);border-radius:8px;padding:8px}
+.warn{margin-top:10px;font-size:12px;text-align:left;background:#FFF8E6;border:1px solid #F2D58A;color:#6B5200;border-radius:8px;padding:8px 10px;line-height:1.4}
+.nets{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}.nchip{font-size:11px;font-weight:700;padding:4px 8px;border-radius:999px;background:var(--bg);color:var(--mut);border:1px solid var(--line)}.nchip.nok{background:#E7F6EF;color:var(--ok);border-color:#BFE6D3}.nchip.nbad{background:#FFF8E6;color:#6B5200;border-color:#F2D58A}.spin{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--red);border-radius:50%;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}.qrtools{display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap}.qrtools .btn{padding:7px 10px;font-size:12px}.setup{display:flex;flex-direction:column;gap:8px;justify-content:center;height:100%;padding:6px;text-align:left}.setup b{font-size:14px}.setup span{font-size:12px;color:var(--mut);line-height:1.4}.setup input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px}.setup input:focus{outline:none;border-color:var(--red)}.steps{display:flex;justify-content:space-between;margin-top:14px;font-size:11.5px;color:var(--mut);font-weight:600}
+.steps i{display:block;font-style:normal;width:24px;height:24px;margin:0 auto 4px;border-radius:50%;background:var(--red-s);color:var(--red-d);line-height:24px;font-weight:800}
+.dc{padding:18px 20px;flex:1}.ph{margin:0 0 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.dept{margin:9px 0}.dept .r{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
+.mini{height:6px;background:var(--bg);border-radius:9px;overflow:hidden}.mini div{height:100%;background:var(--navy2);border-radius:9px;transition:width .6s}
+.main{padding:26px 30px;min-width:0}
+.qh{display:flex;align-items:flex-start;gap:16px}
+.qn{flex:none;width:56px;height:56px;border-radius:14px;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800;font-size:22px}
+.th{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+.qt{margin:4px 0 0;font-size:30px;line-height:1.22;letter-spacing:-.4px}
+.qv{margin-left:auto;text-align:right;flex:none}.qv b{font-size:34px;display:block;line-height:1;font-variant-numeric:tabular-nums}.qv span{font-size:12px;color:var(--mut);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.pod{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px;margin:24px 0 20px}
+.pc{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff;display:flex;flex-direction:column}
+.pc.r1{background:linear-gradient(160deg,#fff 55%,#FFF6F7);border-color:#F3B9C4;box-shadow:0 10px 30px rgba(228,0,43,.10)}
+.pc.bump{animation:bump .6s}@keyframes bump{40%{transform:scale(1.025)}}
+.rk{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.md{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:14px;font-weight:800}
+.r1 .md{background:var(--gold)}.r2 .md{background:var(--silver)}.r3 .md{background:var(--bronze)}
+.pc h3{margin:12px 0 10px;font-size:20px;line-height:1.28;flex:1}.r1 h3{font-size:23px}
+.pct{font-size:40px;font-weight:800;letter-spacing:-1px;font-variant-numeric:tabular-nums}.r1 .pct{color:var(--red)}.pct small{font-size:15px;color:var(--mut);font-weight:600;letter-spacing:0;margin-left:6px}
+.bar{height:8px;background:var(--bg);border-radius:9px;overflow:hidden;margin:8px 0 12px}.bar div{height:100%;border-radius:9px;background:var(--navy2);transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.r1 .bar div{background:linear-gradient(90deg,var(--red),#FF5A78)}
+.ld{font-size:12.5px;color:var(--ink2);border-top:1px dashed var(--line);padding-top:10px}
+.wait{padding:30px;text-align:center;color:var(--mut);border:1px dashed var(--line);border-radius:14px;margin:24px 0}
+.dist{border-top:1px solid var(--line);padding-top:16px}
+.dr{display:grid;grid-template-columns:30px 1fr 110px;gap:14px;align-items:center;margin:12px 0;font-size:17px}
+.dr .l{width:30px;height:30px;border-radius:8px;background:var(--bg);display:grid;place-items:center;font-weight:800;font-size:13px;color:var(--ink2)}
+.dr .n{text-align:right;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}.dr .bar{margin:5px 0 0}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:14px}
+.sc{border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;background:#fff}.sc:hover{border-color:#F3B9C4}
+.sc p{margin:6px 0 12px;font-size:15px;font-weight:600;line-height:1.3;min-height:58px}
+.sl{display:flex;gap:8px;align-items:center;font-size:14px;margin:8px 0}
+.sl i{flex:none;width:18px;height:18px;border-radius:50%;color:#fff;font-style:normal;font-size:10px;font-weight:800;display:grid;place-items:center}
+.sl span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.foot{display:flex;align-items:center;gap:10px;padding:0 28px 20px;flex-wrap:wrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 12px;font-weight:700;font-size:13px;cursor:pointer;color:var(--ink2)}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}.chip.sm{color:var(--red-d)}.chip.sm.on{background:var(--red);border-color:var(--red);color:#fff}
+.ctrl{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.toast{position:fixed;right:24px;top:160px;background:var(--navy);color:#fff;padding:12px 16px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:var(--sh);transform:translateY(-20px);opacity:0;transition:.35s;display:flex;gap:10px;align-items:center;z-index:20}.toast.show{transform:none;opacity:1}
+body.present .adm{display:none}
+/* QR print sheet */
+#S{background:#fff;padding:28px;min-height:100vh}
+.sh{display:flex;align-items:center;gap:18px;border-bottom:3px solid var(--red);padding-bottom:14px;margin-bottom:22px}.sh h1{margin:0;font-size:22px}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tile{border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;break-inside:avoid}
+.tile .q{width:160px;margin:8px auto}.tile .q svg{width:100%;display:block}.tile p{font-size:13.5px;font-weight:600;margin:6px 0 0;line-height:1.3}
+.tile.big{grid-column:span 3;display:flex;gap:26px;align-items:center;justify-content:center;text-align:left;background:#FFF8F9;border-color:#F3B9C4}.tile.big .q{width:200px;margin:0}
+@media print{#S{padding:0}.noprint{display:none!important}}
+/* dynamic value framework */
+.vfk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0 4px}
+.vfk div{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}.vfk b{display:block;font-size:15px;line-height:1.25}.vfk span{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+.vf2{display:grid;grid-template-columns:130px 130px minmax(0,1fr);gap:12px;margin-top:14px}
+.vh{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--mut);text-transform:uppercase;text-align:center}
+.vout{background:#3F4247;color:#fff;border-radius:10px;display:grid;place-items:center;text-align:center;font-size:20px;font-weight:600;padding:12px}.vout small{display:block;font-size:13px;color:#D0D4DA;font-weight:500}
+.vpl{display:grid;grid-template-rows:4fr 6fr;gap:10px}.vpl div{border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px;text-align:center;padding:8px}
+.vpl .rv{background:#C00000}.vpl .oc{background:#A6A6A6}
+.vrows{display:grid;gap:10px}
+.vrow{display:grid;grid-template-columns:210px minmax(0,1fr);gap:10px;align-items:stretch}
+.vlev{position:relative;border-radius:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-weight:800;font-size:15px;padding:10px;border:2px solid #E2E2E2;background:#F4F4F4;color:var(--ink)}
+.vlev.rv{background:#FFE3E3;border-color:#FF9C9C}
+.vlev.hot{box-shadow:0 0 0 3px var(--red);border-color:var(--red)}
+.vlev .crown{position:absolute;top:-10px;right:8px;background:var(--red);color:#fff;font-size:10px;letter-spacing:.06em;padding:3px 7px;border-radius:999px;text-transform:uppercase}
+.vlev .pr{width:100%;margin-top:8px;font-size:11px;font-weight:700;color:var(--ink2)}
+.vlev .pr .bar{height:7px;border-radius:99px;background:rgba(0,0,0,.08);overflow:hidden;margin-top:4px}.vlev .pr .bar i{display:block;height:100%;background:var(--red);border-radius:99px}
+.vlev .qs{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin-top:7px}
+.vlev .qs button,.vlev .qs span{border:0;border-radius:6px;background:#fff;color:var(--red-d);font-weight:800;font-size:11px;padding:3px 7px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.vdrv{display:grid;gap:8px}.vd{border:1.5px solid #E1E1E1;border-radius:8px;padding:8px 12px;font-size:13.5px;line-height:1.35;background:#fff}
+.vd .h b{font-weight:800}
+.vd .live{display:flex;gap:10px;align-items:center;margin-top:5px;font-size:12.5px;color:var(--ink2)}
+.vd .live .bar{flex:0 0 90px;height:7px;border-radius:99px;background:var(--bg);overflow:hidden}.vd .live .bar i{display:block;height:100%;background:var(--navy)}
+.vd .live b{color:var(--red-d);white-space:nowrap}.vd .live span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vd .wait{color:var(--mut);font-style:italic;font-size:12px;margin-top:4px}
+.vnote{margin-top:12px;font-size:11.5px;color:var(--mut)}
+@media (max-width:1100px){.vfk{grid-template-columns:repeat(2,1fr)}.vf2{grid-template-columns:1fr}.vrow{grid-template-columns:1fr}.vpl{grid-template-rows:auto auto}}
+/* save status */
+.svs{font-size:12.5px;line-height:1.5;color:var(--ink2)}.svs b{color:#047857}
+.svb{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.svb .btn{padding:6px 10px;font-size:12px}
+/* ===== PDF REPORT ===== */
+#RP{background:#fff;color:#111827;min-height:100vh}
+#RP .rbar{position:sticky;top:0;z-index:5;display:flex;gap:10px;align-items:center;padding:12px 24px;background:var(--navy);color:#fff}
+#RP .rbar b{flex:1}
+#RP .rpg{max-width:1000px;margin:0 auto;padding:28px 34px}
+.rcv{border-bottom:4px solid var(--red);padding-bottom:18px;margin-bottom:22px;display:flex;gap:20px;align-items:flex-end}
+.rcv h1{margin:6px 0 4px;font-size:30px;line-height:1.15}.rcv .meta{font-size:13px;color:#4B5563}
+.rcv .conf{margin-left:auto;text-align:right;font-size:11px;color:#6B7280;text-transform:uppercase;letter-spacing:.1em}
+.rsec{margin:0 0 26px;break-inside:auto}
+.rsec>h2.rh{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-d);margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid #E5E7EB}
+.rkpi{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.rkpi div{border:1px solid #E5E7EB;border-radius:10px;padding:12px}.rkpi b{display:block;font-size:24px}.rkpi span{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:#6B7280;font-weight:700}
+.rtab{width:100%;border-collapse:collapse;font-size:12.5px}.rtab th{background:#F3F4F6;text-align:left;padding:7px 8px;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#374151}
+.rtab td{padding:7px 8px;border-bottom:1px solid #E5E7EB;vertical-align:top}.rtab td.n{text-align:right;white-space:nowrap;font-weight:700}
+.rtab tr{break-inside:avoid}
+.rqq{border:1px solid #E5E7EB;border-radius:12px;padding:14px 16px;margin-bottom:12px;break-inside:avoid}
+.rqq .t{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--red-d);font-weight:800}
+.rqq h3{margin:4px 0 2px;font-size:15.5px;line-height:1.3}.rqq .s{font-size:11.5px;color:#6B7280;margin-bottom:8px}
+.rbr{display:grid;grid-template-columns:22px minmax(0,1fr) 150px 70px;gap:8px;align-items:center;font-size:12.5px;padding:3px 0}
+.rbr .l{font-weight:800;color:#6B7280}.rbr .bar{height:9px;border-radius:99px;background:#F3F4F6;overflow:hidden}.rbr .bar i{display:block;height:100%;background:#1F2937}
+.rbr.top .bar i{background:var(--red)}.rbr.top span{font-weight:700}.rbr .n{text-align:right;font-weight:700}
+.roth{margin-top:8px;border-top:1px dashed #E5E7EB;padding-top:6px;font-size:12px}.roth li{margin:3px 0}.roth em{color:#6B7280;font-style:normal}
+.rfoot{margin-top:22px;padding-top:10px;border-top:1px solid #E5E7EB;font-size:10.5px;color:#6B7280;display:flex;justify-content:space-between}
+#RP .vf2{grid-template-columns:110px 110px minmax(0,1fr)}#RP .vrow{grid-template-columns:180px minmax(0,1fr)}
+#RP .vlev{font-size:13px}#RP .vd{font-size:12px}
+.rpb{break-before:page}
+@page{size:A4;margin:12mm}
+@media print{
+  body{background:#fff}
+  #RP .rbar{display:none}#RP .rpg{max-width:none;padding:0}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .rkpi{grid-template-columns:repeat(4,1fr)}
+}
+/* ===== PHONE ===== */
+#V{max-width:520px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+.vbar{background:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.vbar .logo b{font-size:23px}.vbar .logo small{font-size:8.5px;letter-spacing:2.2px}
+.hero{background:linear-gradient(140deg,var(--navy),#22314A);color:#fff;padding:24px 20px 46px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-60px;top:-70px;width:200px;height:200px;border-radius:50%;background:rgba(228,0,43,.22)}
+.hero small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#FF9AAE;position:relative}
+.hero h1{margin:6px 0 4px;font-size:24px;line-height:1.2;position:relative}.hero p{margin:0;color:#C9D2E0;font-size:14px;position:relative}
+.vb{padding:0 16px 28px;margin-top:-28px;position:relative;flex:1}.vb .card{padding:20px;border-radius:18px}
+label{display:block;font-size:13px;font-weight:700;color:var(--ink2);margin:14px 0 6px}
+#V input,#V select{width:100%;font-size:16px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+#V input:focus,#V select:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(228,0,43,.12)}
+.full{width:100%;padding:15px;font-size:16px;border-radius:12px;margin-top:18px}
+.note{font-size:12px;color:var(--mut);margin-top:12px;text-align:center}
+.pg{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--mut);margin-bottom:8px}
+.trk{height:6px;background:var(--bg);border-radius:9px;overflow:hidden;margin-bottom:18px}.trk div{height:100%;background:var(--red);transition:width .4s}
+.vq{font-size:20px;line-height:1.3;margin:6px 0 16px}
+.opt{width:100%;display:flex;gap:12px;align-items:center;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;cursor:pointer;font-size:15.5px;color:var(--ink)}
+.opt .l{flex:none;width:32px;height:32px;border-radius:10px;background:var(--bg);display:grid;place-items:center;font-weight:800;color:var(--ink2)}
+.opt.sel{border-color:var(--red);background:#FFF7F8}.opt.sel .l{background:var(--red);color:#fff}
+.nav{display:flex;gap:10px;margin-top:16px}.nav .btn{flex:1;padding:14px;border-radius:12px;font-size:15px}
+.err{color:var(--red-d);font-size:13px;margin-top:10px;min-height:18px;text-align:center}
+.done{text-align:center}.tick{width:72px;height:72px;border-radius:50%;background:#E7F6EF;color:var(--ok);display:grid;place-items:center;margin:10px auto 14px;font-size:36px}
+.lst{text-align:left;margin-top:16px;border-top:1px solid var(--line)}.lst div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13.5px}.lst span{text-align:right}
+.flash{position:fixed;left:50%;top:76px;transform:translateX(-50%);background:var(--ok);color:#fff;padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;transition:.3s;z-index:9;pointer-events:none}.flash.show{opacity:1}
+.vf{text-align:center;font-size:11px;color:var(--mut);padding:14px}
+/* question hint, multi-select, Other + AI */
+.qhp{margin:8px 0 0;font-size:15px;color:var(--mut);line-height:1.4}
+.mh{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.04em;color:var(--red-d);background:var(--red-s);padding:4px 9px;border-radius:999px;margin:0 0 10px}
+.qhint{font-size:13.5px;color:var(--ink2);background:var(--bg);border-left:3px solid var(--red);padding:9px 11px;border-radius:8px;margin:-4px 0 12px;line-height:1.45}
+.opt.multi .l{border-radius:8px}
+.opt.oth .l{background:#EEF4FF;color:#1D4ED8}.opt.oth.sel .l{background:#1D4ED8;color:#fff}.opt.oth.sel{border-color:#1D4ED8;background:#F4F8FF}
+.othw{margin:2px 0 6px}
+#V textarea{width:100%;min-height:96px;font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);resize:vertical;color:var(--ink);background:#fff}
+#V textarea:focus{outline:none;border-color:#1D4ED8;box-shadow:0 0 0 3px rgba(29,78,216,.12)}
+.cnt{font-size:11px;color:var(--mut);text-align:right;margin-top:4px}
+.aip{margin-top:8px;border:1px solid #CFE0FF;background:#F4F8FF;border-radius:12px;padding:10px 12px;font-size:14.5px;line-height:1.45;color:var(--ink)}
+.aip b{display:flex;gap:6px;align-items:center;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#1D4ED8;margin-bottom:4px}
+.aitag{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:#EEF4FF;color:#1D4ED8}
+.oth{border-top:1px solid var(--line);padding-top:16px;margin-top:10px}
+.ohd{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}.ohd .ph{margin:0;flex:1}
+.ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.oi{border:1px solid var(--line);border-left:4px solid #1D4ED8;border-radius:12px;padding:12px 14px;background:#FCFDFF}
+.oi p{margin:0 0 8px;font-size:16px;line-height:1.4;font-weight:600}
+.oi .m{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--mut)}
+.oi details{font-size:12.5px;color:var(--mut);margin-top:6px}.oi summary{cursor:pointer;font-weight:600}
+.oe{color:var(--mut);font-size:13.5px;border:1px dashed var(--line);border-radius:12px;padding:14px;text-align:center}
+/* tabs & views */
+.tbar{background:var(--navy);display:flex;align-items:stretch;gap:0;padding:0 28px;flex-wrap:wrap}
+.trk2{display:flex;gap:4px}
+.ttab{border:0;background:transparent;color:#AEB8C8;padding:12px 18px 11px;cursor:pointer;text-align:left;border-bottom:3px solid transparent;font:inherit}
+.ttab b{display:block;font-size:14.5px;color:#fff;letter-spacing:.01em}.ttab span{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.ttab.on{border-bottom-color:var(--red);background:rgba(255,255,255,.06)}.ttab:not(.on) b{color:#C9D2E0}
+.ttab:focus-visible,.vtab:focus-visible{outline:2px solid #fff;outline-offset:-4px}
+.vtabs{margin-left:auto;display:flex;gap:4px;align-items:center;flex-wrap:wrap;padding:8px 0}
+.vtab{border:1px solid rgba(255,255,255,.18);background:transparent;color:#DCE3EE;border-radius:9px;padding:8px 13px;font-weight:700;font-size:13px;cursor:pointer}
+.vtab.on{background:#fff;color:var(--navy);border-color:#fff}
+.sess{padding:18px 20px}.sess h3{margin:4px 0 2px;font-size:20px}.sess .cu{font-size:15px;font-weight:700;color:var(--red-d)}
+.sess .lv{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.lvb{display:inline-flex;gap:6px;align-items:center;font-size:12.5px;font-weight:700;padding:6px 10px;border-radius:999px;background:var(--red-s);color:var(--red-d)}
+.qlv{display:inline-block;margin-left:8px;font-size:10.5px;padding:3px 8px;border-radius:999px;background:var(--bg);color:var(--ink2);letter-spacing:.06em;vertical-align:1px}
+.dk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}
+.kp{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}.kp b{display:block;font-size:30px;font-variant-numeric:tabular-nums}.kp span{font-size:11.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.dtab{width:100%;border-collapse:collapse;font-size:15px}.dtab th{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}
+.dtab td{padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:middle}.dtab td.n{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;width:110px}
+.dtab .mini{height:9px;margin-top:6px}
+@media (max-width:1100px){.dk{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:1100px){.ol{grid-template-columns:1fr}}
+@media (max-width:1100px){.wrap{grid-template-columns:1fr}.pod{grid-template-columns:1fr}.sum{grid-template-columns:repeat(2,minmax(0,1fr))}.qt{font-size:24px}.top{flex-wrap:wrap}.stats{margin-left:0}.sg{grid-template-columns:repeat(2,1fr)}.tile.big{grid-column:span 2}}
+@media (max-width:560px){.sum,.sg{grid-template-columns:1fr}.tile.big{grid-column:span 1;flex-direction:column;text-align:center}.vr{display:none}}
+</style>
+</head>
+<body>
+
+<!-- ================= PROJECTOR DASHBOARD ================= -->
+<div id="P" class="hidden">
+  <header class="top">
+    <span class="logo"><b>Honeywell</b><small>Technologies</small></span>
+    <div class="vr"></div>
+    <div><h1 class="wsT"></h1><p class="wsS"></p></div>
+    <div class="stats">
+      <span class="conn" id="conn"><span class="dot"></span><span id="connT">Connecting…</span></span>
+      <div class="stat"><b id="sP">0</b><span>Participants</span></div>
+      <div class="stat"><b id="sV">0</b><span>Answers</span></div>
+      <div class="clock" id="clk"></div>
+    </div>
+  </header>
+  <nav class="tbar" aria-label="Workshop sessions and views">
+    <div class="trk2" id="tTabs" role="tablist"></div>
+    <div class="vtabs" id="vTabs">
+      <button type="button" class="vtab on" data-v="one">Live results</button>
+      <button type="button" class="vtab" data-v="all">★ Top 3 summary</button>
+      <button type="button" class="vtab" data-v="dept">Department participation</button>
+      <button type="button" class="vtab" data-v="value">Value framework</button>
+    </div>
+  </nav>
+  <div class="wrap">
+    <aside class="side">
+      <section class="card qrc">
+        <span class="badge"><span class="dot"></span>Scan to vote</span>
+        <h2 id="qrT">Join the live poll</h2>
+        <p class="hint" id="qrH"></p>
+        <div class="seg"><button type="button" class="on" data-m="all">All questions</button><button type="button" data-m="one">This question</button></div>
+        <div class="qrbox" id="qrB"></div>
+        <div class="qrurl" id="qrU"></div>
+        <div class="nets" id="netS" aria-live="polite"></div>
+        <div class="qrtools" id="qrTools"><button type="button" class="btn bg" id="bSaveQR">⬇ Save QR image</button><button type="button" class="btn bg adm" id="bLink">Change link</button></div>
+        <div class="warn hidden" id="qrW"></div>
+        <div class="steps"><div><i>1</i>Scan</div><div><i>2</i>Choose</div><div><i>3</i>Submit</div><div><i>4</i>See live</div></div>
+      </section>
+      <section class="card sess" id="sess"></section>
+    </aside>
+    <main class="card main">
+      <div id="one">
+        <div class="qh"><div class="qn" id="qN"></div><div style="min-width:0"><div class="th"><span id="qTh"></span><span class="qlv" id="qLv"></span></div><h2 class="qt" id="qT"></h2><p class="qhp" id="qHp"></p></div><div class="qv"><b id="qTot">0</b><span>Respondents</span></div></div>
+        <div id="podW"></div>
+        <div class="dist"><h3 class="ph">All answers</h3><div id="dist"></div></div>
+        <div class="oth"><div class="ohd"><h3 class="ph">“Other” responses · rewritten professionally by AI</h3><button type="button" class="btn bg adm" id="bAI">✨ Refine with AI</button><button type="button" class="btn bg adm" id="bAIset">AI settings</button></div><div id="othL"></div></div>
+      </div>
+      <div id="all" class="hidden"><div class="th">Workshop summary · Path forward</div><h2 class="qt" style="font-size:28px">Top 3 answers for every question</h2><div class="sum" id="sum"></div></div>
+      <div id="deptV" class="hidden"><div class="th">Participation · <span id="dvS"></span></div><h2 class="qt" style="font-size:28px">Who is shaping the answers</h2><div class="dk" id="dK"></div><table class="dtab"><thead><tr><th>Department</th><th style="text-align:right">Participants</th><th style="text-align:right">Answers</th><th style="text-align:right">“Other” comments</th></tr></thead><tbody id="dT2"></tbody></table></div>
+      <div id="valV" class="hidden"></div>
+    </main>
+  </div>
+  <footer class="foot">
+    <div class="chips" id="chips"></div>
+    <div class="ctrl">
+      <button type="button" class="btn bg" id="bPrev">‹ Prev</button>
+      <button type="button" class="btn bg" id="bNext">Next ›</button>
+      <button type="button" class="btn bg" id="bAuto">Auto-rotate</button>
+      <button type="button" class="btn bg" id="bFull">Full screen</button>
+      <button type="button" class="btn bg adm" id="bSheet">Print QR sheet</button>
+      <button type="button" class="btn bp adm" id="bPdf">📄 PDF report</button>
+      <button type="button" class="btn bg adm" id="bCsv">Export CSV</button>
+      <button type="button" class="btn bg adm" id="bDemo">Demo votes</button>
+      <button type="button" class="btn bg adm" id="bReset">Reset</button>
+    </div>
+  </footer>
+  <div class="toast" id="toast" aria-live="polite"><span class="dot"></span><span id="toastT"></span></div>
+</div>
+
+<!-- ================= PRINTABLE QR SHEET ================= -->
+<div id="S" class="hidden">
+  <div class="sh"><span class="logo"><b>Honeywell</b><small>Technologies</small></span><div><h1 class="wsT"></h1><p class="mut" style="margin:2px 0 0;font-size:13px">Scan with your phone camera to vote live</p></div>
+    <div style="margin-left:auto" class="noprint"><button type="button" class="btn bg" id="bBack">‹ Back to dashboard</button> <button type="button" class="btn bp" onclick="print()">Print / Save PDF</button></div></div>
+  <div class="sg" id="sg"></div>
+</div>
+
+<!-- ================= PDF REPORT ================= -->
+<div id="RP" class="hidden">
+  <div class="rbar noprint"><b>Workshop report · preview</b><button type="button" class="btn bg" id="bRBack">‹ Back to dashboard</button><button type="button" class="btn bp" id="bRPrint">⬇ Print / Save as PDF</button></div>
+  <div class="rpg" id="rpB"></div>
+</div>
+
+<!-- ================= MOBILE VOTING ================= -->
+<div id="V" class="hidden">
+  <div class="vbar"><span class="logo"><b>Honeywell</b><small>Technologies</small></span><span class="badge" id="vConn"><span class="dot"></span><span id="vConnT">Live poll</span></span></div>
+  <div class="hero"><small id="vSess">Executive Customer Workshop</small><h1 class="wsT"></h1><p>Your answers appear live on the main screen.</p></div>
+  <div class="vb">
+    <section class="card" id="vW">
+      <h2 style="margin:0 0 4px;font-size:20px">Welcome 👋</h2>
+      <p class="mut" style="margin:0;font-size:14px">Tell us where you work so we can capture each department’s perspective.</p>
+      <form id="fJ" novalidate>
+        <label for="dpt">Your department *</label><select id="dpt"><option value="">Select department…</option></select>
+        <label for="nm">Name <span class="mut" style="font-weight:500">(optional)</span></label><input id="nm" maxlength="60" autocomplete="name" placeholder="e.g. Ahmed">
+        <div class="err" id="jE" aria-live="polite"></div>
+        <button class="btn bp full" type="submit">Start voting →</button>
+      </form>
+      <div class="note">One answer per question · you can change your answer anytime</div>
+    </section>
+    <section class="card hidden" id="vQ">
+      <div class="pg"><span id="pT"></span><span id="pP"></span></div><div class="trk"><div id="pB"></div></div>
+      <div class="th" id="vTh"></div><h2 class="vq" id="vT"></h2><div id="vMh"></div><div class="qhint hidden" id="vHint"></div>
+      <div id="opts" aria-labelledby="vT"></div>
+      <div class="othw hidden" id="othW">
+        <label for="othT">Please describe your answer</label>
+        <textarea id="othT" maxlength="300" placeholder="Type in your own words – AI will tidy up the wording for the main screen"></textarea>
+        <div class="cnt" id="othC">0 / 300</div>
+        <div class="aip hidden" id="othP" aria-live="polite"><b>✨ AI-refined · shown on main screen</b><span id="othPT"></span></div>
+      </div>
+      <div class="err" id="vE" aria-live="polite"></div>
+      <div class="nav"><button type="button" class="btn bg" id="bB">‹ Back</button><button type="button" class="btn bp" id="bS" disabled>Submit</button></div>
+    </section>
+    <section class="card done hidden" id="vD">
+      <div class="tick">✓</div><h2 style="margin:0 0 6px">Thank you!</h2><p class="mut" id="dT" style="margin:0">Your answers are live on the main screen.</p>
+      <div class="lst" id="dL"></div>
+      <button type="button" class="btn bg full" id="bR">Review or change my answers</button>
+    </section>
+  </div>
+  <div class="vf">Honeywell Technologies · <span class="wsT"></span></div>
+  <div class="flash" id="flash">✓ Answer received on main screen</div>
+</div>
+
+<script>
+/* =====================================================================
+   1) WORKSHOP CONTENT — edit questions/options/departments here
+   ===================================================================== */
+const CONFIG = {
+  workshop: "The Path to Resilient Operations",
+  subtitle: "Honeywell Process Automation · Executive Customer Workshop · Kuwait",
+  voteUrl: "",
+  broker: "wss://broker.hivemq.com:8884/mqtt",
+  departments: ["Operations / Production","Maintenance & Reliability","Digital Services / IT","OT / Control Systems Engineering","Process & Technical Engineering","HSE","Management / Leadership","Other"],
+  otherLabel: "Other (please specify)",
+  levers: {"prod": "Increased Production", "value": "Improved Product Value", "energy": "Energy & Fuel Gas", "om": "O&M Costs", "people": "Personnel Costs", "safety": "Plant & People Safety", "path": "Path Forward"},
+  tracks: {
+ "pc": {
+  "name": "Petrochemical",
+  "customers": "EQUATE · PIC",
+  "day": "Session 1 · 23rd",
+  "questions": [
+   {
+    "id": 1,
+    "lever": "prod",
+    "theme": "Throughput Constraints",
+    "multi": true,
+    "text": "Which constraints most often prevent your plants from operating at maximum capacity?",
+    "options": [
+     "Cracker furnace coking and decoking cycles",
+     "Compressor limits (charge gas / refrigeration)",
+     "Polymer reactor, extruder or pelletizer bottlenecks",
+     "Utility limits (steam, cooling water, flare capacity)"
+    ]
+   },
+   {
+    "id": 2,
+    "lever": "prod",
+    "theme": "Unplanned Downtime",
+    "multi": true,
+    "text": "What have been the main causes of unplanned trips or shutdowns over the last 3 years?",
+    "options": [
+     "Rotating equipment failures (compressors, pumps, extruders)",
+     "Process instrument and control valve failures",
+     "Process upsets (fouling, reactor sheeting, runaway)",
+     "Power or utility interruptions"
+    ]
+   },
+   {
+    "id": 3,
+    "lever": "safety",
+    "theme": "Early Warning",
+    "multi": true,
+    "text": "Which events could your operators prevent or mitigate with 30–60 minutes of early warning?",
+    "options": [
+     "Polymerization reactor sheeting or runaway",
+     "Compressor surge or trip",
+     "Furnace tube-metal-temperature excursions",
+     "Extruder / pelletizer trips"
+    ],
+    "hint": "Early notification lets operators act to avoid an abnormal situation, or to reduce its impact."
+   },
+   {
+    "id": 4,
+    "lever": "value",
+    "theme": "Yield & Product Value",
+    "multi": true,
+    "text": "Where do you lose the most product value today?",
+    "options": [
+     "Off-spec material during grade transitions",
+     "Lower cracker yield due to feed variability",
+     "Catalyst activity decline and selectivity loss",
+     "Rework / downgrade caused by delayed lab results"
+    ]
+   },
+   {
+    "id": 5,
+    "lever": "value",
+    "theme": "Quality Control",
+    "multi": false,
+    "text": "How is product quality controlled in your plants today?",
+    "options": [
+     "Mainly by lab samples every few hours",
+     "Online analyzers, but with limited operator trust",
+     "Soft sensors / inferentials used within APC",
+     "Fully closed-loop quality control"
+    ]
+   },
+   {
+    "id": 6,
+    "lever": "energy",
+    "theme": "Energy & Fuel Gas",
+    "multi": true,
+    "text": "Where is your largest energy and fuel gas savings opportunity?",
+    "options": [
+     "Furnace firing and excess-O₂ control",
+     "Steam balance and letdown losses",
+     "Compressor and refrigeration efficiency",
+     "Flaring reduction and fuel gas balance"
+    ]
+   },
+   {
+    "id": 7,
+    "lever": "om",
+    "theme": "Recurring Activities",
+    "multi": true,
+    "text": "Which recurring activities require the most planning, manpower and resources?",
+    "options": [
+     "Furnace decoking",
+     "Dryer / molecular-sieve regeneration",
+     "Catalyst changeover and grade-change campaigns",
+     "Heat exchanger cleaning"
+    ]
+   },
+   {
+    "id": 8,
+    "lever": "om",
+    "theme": "Planning Optimization",
+    "multi": false,
+    "text": "Is there an opportunity to optimize when these recurring activities are performed?",
+    "options": [
+     "Yes – predict optimal timing from real-time performance data",
+     "Yes – improve manpower, material and resource planning",
+     "Partially – planning works but lacks data visibility",
+     "No – current planning is adequate"
+    ],
+    "hint": "Example: an early catalyst changeover wastes catalyst life, while a delayed changeover impacts product quality."
+   },
+   {
+    "id": 9,
+    "lever": "om",
+    "theme": "Maintenance Strategy",
+    "multi": false,
+    "text": "Which best describes the maintenance approach for your critical assets today?",
+    "options": [
+     "Mostly reactive / run-to-failure",
+     "Time-based preventive maintenance",
+     "Condition monitoring on selected assets",
+     "Predictive analytics across the asset fleet"
+    ]
+   },
+   {
+    "id": 10,
+    "lever": "safety",
+    "theme": "Alarm Management",
+    "multi": true,
+    "text": "What is the biggest alarm-management challenge in your control rooms?",
+    "options": [
+     "Alarm floods during upsets",
+     "Standing and nuisance alarms",
+     "Unclear operator response to critical alarms",
+     "Alarm rationalization not sustained over time"
+    ]
+   },
+   {
+    "id": 11,
+    "lever": "people",
+    "theme": "Knowledge Retention",
+    "multi": true,
+    "text": "What is your biggest workforce and knowledge risk?",
+    "options": [
+     "Retirement of experienced operators",
+     "Long training time for new panel operators",
+     "Inconsistent shift handover",
+     "Procedures and lessons learned not digitized"
+    ]
+   },
+   {
+    "id": 12,
+    "lever": "people",
+    "theme": "Workforce Efficiency",
+    "multi": true,
+    "text": "Where do operators and engineers spend the most non-value-added time?",
+    "options": [
+     "Manual logs and shift reports",
+     "Searching for data across multiple systems",
+     "Manual field rounds and readings",
+     "Coordination calls between control room and field"
+    ]
+   },
+   {
+    "id": 13,
+    "lever": "safety",
+    "theme": "Process Safety",
+    "multi": true,
+    "text": "Which plant and people safety area needs the strongest digital support?",
+    "options": [
+     "Early detection of abnormal situations",
+     "Safe start-up, shutdown and transient operations",
+     "Real-time visibility of field workers and permits",
+     "Process safety KPIs (SIS demands, LOPC, IOW violations)"
+    ]
+   },
+   {
+    "id": 14,
+    "lever": "path",
+    "theme": "AI Readiness",
+    "multi": false,
+    "text": "What level of AI autonomy would your organization accept in the next 2–3 years?",
+    "options": [
+     "Advisory only – AI recommends, operator decides",
+     "AI recommends and acts after operator approval",
+     "Closed-loop on selected units with operator override",
+     "Not ready yet – focus on data foundation first"
+    ]
+   },
+   {
+    "id": 15,
+    "lever": "path",
+    "theme": "Path Forward",
+    "multi": false,
+    "text": "Which value lever should be the focus of the first autonomous-operations pilot?",
+    "options": [
+     "Increased production – throughput and downtime",
+     "Improved product value – yield and quality",
+     "Energy and fuel gas optimization",
+     "O&M cost and asset reliability"
+    ]
+   }
+  ]
+ },
+ "rf": {
+  "name": "Refinery",
+  "customers": "KNPC",
+  "day": "Session 2 · 24th",
+  "questions": [
+   {
+    "id": 1,
+    "lever": "prod",
+    "theme": "Throughput Constraints",
+    "multi": true,
+    "text": "Which constraints most often prevent your refinery units from operating at maximum capacity?",
+    "options": [
+     "Fired heater limits (firing, tube-metal temperature)",
+     "Column hydraulics (flooding, fractionation limits)",
+     "Hydrogen availability and recycle-compressor limits",
+     "Crude / feed quality changes and crude switches"
+    ]
+   },
+   {
+    "id": 2,
+    "lever": "prod",
+    "theme": "Unplanned Downtime",
+    "multi": true,
+    "text": "What have been the main causes of unplanned trips or shutdowns over the last 3 years?",
+    "options": [
+     "Rotating equipment failures (compressors, pumps)",
+     "Process instrument and control valve failures",
+     "Process upsets (crude switch, coke drum, fouling)",
+     "Power or utility interruptions"
+    ]
+   },
+   {
+    "id": 3,
+    "lever": "safety",
+    "theme": "Early Warning",
+    "multi": true,
+    "text": "Which events could your operators prevent or mitigate with 30–60 minutes of early warning?",
+    "options": [
+     "Heater tube overheating and coking",
+     "Wet-gas or recycle compressor trips",
+     "Desalter upsets and overhead corrosion",
+     "Hydroprocessing reactor temperature excursions"
+    ],
+    "hint": "Early notification lets operators act to avoid an abnormal situation, or to reduce its impact."
+   },
+   {
+    "id": 4,
+    "lever": "value",
+    "theme": "Yield & Product Value",
+    "multi": true,
+    "text": "Where do you lose the most product value today?",
+    "options": [
+     "Quality giveaway against specification (sulfur, flash, RVP)",
+     "Off-spec product, re-blending or reprocessing",
+     "Sub-optimal conversion and cut points",
+     "Delayed lab results driving conservative operation"
+    ]
+   },
+   {
+    "id": 5,
+    "lever": "value",
+    "theme": "Quality Control",
+    "multi": false,
+    "text": "How is product quality controlled in your units today?",
+    "options": [
+     "Mainly by lab samples every few hours",
+     "Online analyzers, but with limited operator trust",
+     "Soft sensors / inferentials used within APC",
+     "Fully closed-loop quality control"
+    ]
+   },
+   {
+    "id": 6,
+    "lever": "energy",
+    "theme": "Energy & Fuel Gas",
+    "multi": true,
+    "text": "Where is your largest energy and fuel gas savings opportunity?",
+    "options": [
+     "Fired heater efficiency and excess-O₂ control",
+     "Preheat-train fouling and heat recovery",
+     "Steam and hydrogen network optimization",
+     "Flaring reduction and fuel gas balance"
+    ]
+   },
+   {
+    "id": 7,
+    "lever": "om",
+    "theme": "Recurring Activities",
+    "multi": true,
+    "text": "Which recurring activities require the most planning, manpower and resources?",
+    "options": [
+     "Catalyst changeover (hydrotreaters, hydrocrackers, RFCC)",
+     "Coke drum changeover (DCU)",
+     "Heater tube spalling / decoking (DCU)",
+     "Drier regeneration and exchanger cleaning"
+    ]
+   },
+   {
+    "id": 8,
+    "lever": "om",
+    "theme": "Planning Optimization",
+    "multi": false,
+    "text": "Is there an opportunity to optimize when these recurring activities are performed?",
+    "options": [
+     "Yes – predict optimal timing from real-time performance data",
+     "Yes – improve manpower, material and resource planning",
+     "Partially – planning works but lacks data visibility",
+     "No – current planning is adequate"
+    ],
+    "hint": "Example: an early catalyst changeover wastes catalyst life, while a delayed changeover impacts product quality."
+   },
+   {
+    "id": 9,
+    "lever": "om",
+    "theme": "Maintenance Strategy",
+    "multi": false,
+    "text": "Which best describes the maintenance approach for your critical assets today?",
+    "options": [
+     "Mostly reactive / run-to-failure",
+     "Time-based preventive maintenance",
+     "Condition monitoring on selected assets",
+     "Predictive analytics across the asset fleet"
+    ]
+   },
+   {
+    "id": 10,
+    "lever": "safety",
+    "theme": "Alarm Management",
+    "multi": true,
+    "text": "What is the biggest alarm-management challenge in your control rooms?",
+    "options": [
+     "Alarm floods during upsets",
+     "Standing and nuisance alarms",
+     "Unclear operator response to critical alarms",
+     "Alarm rationalization not sustained over time"
+    ]
+   },
+   {
+    "id": 11,
+    "lever": "people",
+    "theme": "Knowledge Retention",
+    "multi": true,
+    "text": "What is your biggest workforce and knowledge risk?",
+    "options": [
+     "Retirement of experienced operators",
+     "Long training time for new panel operators",
+     "Inconsistent shift handover",
+     "Procedures and lessons learned not digitized"
+    ]
+   },
+   {
+    "id": 12,
+    "lever": "people",
+    "theme": "Workforce Efficiency",
+    "multi": true,
+    "text": "Where do operators and engineers spend the most non-value-added time?",
+    "options": [
+     "Manual logs and shift reports",
+     "Searching for data across multiple systems",
+     "Manual field rounds and readings",
+     "Coordination calls between control room and field"
+    ]
+   },
+   {
+    "id": 13,
+    "lever": "safety",
+    "theme": "Process Safety",
+    "multi": true,
+    "text": "Which plant and people safety area needs the strongest digital support?",
+    "options": [
+     "H₂S and toxic / hydrocarbon release detection",
+     "Safe start-up, shutdown and transient operations",
+     "Corrosion and integrity operating window (IOW) violations",
+     "Real-time visibility of field workers and permits"
+    ]
+   },
+   {
+    "id": 14,
+    "lever": "path",
+    "theme": "AI Readiness",
+    "multi": false,
+    "text": "What level of AI autonomy would your organization accept in the next 2–3 years?",
+    "options": [
+     "Advisory only – AI recommends, operator decides",
+     "AI recommends and acts after operator approval",
+     "Closed-loop on selected units with operator override",
+     "Not ready yet – focus on data foundation first"
+    ]
+   },
+   {
+    "id": 15,
+    "lever": "path",
+    "theme": "Path Forward",
+    "multi": false,
+    "text": "Which value lever should be the focus of the first autonomous-operations pilot?",
+    "options": [
+     "Increased production – throughput and downtime",
+     "Improved product value – yield and quality",
+     "Energy and fuel gas optimization",
+     "O&M cost and asset reliability"
+    ]
+   }
+  ]
+ }
+}
+};
+const ADMIN_KEY = "honeywell";
+</script>
+<script>
+/* 2) QR CODE GENERATOR (embedded, no internet needed) */
+/* Minimal QR Code generator (byte mode, auto version, ECC level M). No dependencies.
+   Works in browser (window.QR) and Node (module.exports). */
+(function (root) {
+  'use strict';
+  const ECC_M = [-1,10,16,26,18,24,16,18,22,22,26,30,22,22,24,24,28,28,26,26,26,26,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28];
+  const BLK_M = [-1,1,1,1,2,2,4,4,4,5,5,5,8,9,9,10,10,11,13,14,16,17,17,18,20,21,23,25,26,28,29,31,33,35,37,38,40,43,45,47,49];
+  const FORMAT_ECL_M = 0;
+
+  function rawModules(v) {
+    let r = (16 * v + 128) * v + 64;
+    if (v >= 2) { const n = Math.floor(v / 7) + 2; r -= (25 * n - 10) * n - 55; if (v >= 7) r -= 36; }
+    return r;
+  }
+  const dataCodewords = v => Math.floor(rawModules(v) / 8) - ECC_M[v] * BLK_M[v];
+  function gfMul(x, y) { let z = 0; for (let i = 7; i >= 0; i--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> i) & 1) * x; } return z & 0xFF; }
+  function rsDivisor(deg) {
+    const r = new Array(deg).fill(0); r[deg - 1] = 1; let root = 1;
+    for (let i = 0; i < deg; i++) { for (let j = 0; j < r.length; j++) { r[j] = gfMul(r[j], root); if (j + 1 < r.length) r[j] ^= r[j + 1]; } root = gfMul(root, 0x02); }
+    return r;
+  }
+  function rsRemainder(data, div) {
+    const r = new Array(div.length).fill(0);
+    for (const b of data) { const f = b ^ r.shift(); r.push(0); div.forEach((c, i) => { r[i] ^= gfMul(c, f); }); }
+    return r;
+  }
+  function utf8(str) { return Array.from(new TextEncoder().encode(str)); }
+  function alignPos(v, size) {
+    if (v === 1) return [];
+    const n = Math.floor(v / 7) + 2;
+    const step = v === 32 ? 26 : Math.ceil((v * 4 + 4) / (n * 2 - 2)) * 2;
+    const res = [6];
+    for (let p = size - 7; res.length < n; p -= step) res.splice(1, 0, p);
+    return res;
+  }
+
+  function encode(text) {
+    const bytes = utf8(text);
+    let ver = 0;
+    for (let v = 1; v <= 40; v++) {
+      const cc = v < 10 ? 8 : 16;
+      if (4 + cc + bytes.length * 8 <= dataCodewords(v) * 8) { ver = v; break; }
+    }
+    if (!ver) throw new Error('Text too long for QR code');
+    // Bit stream
+    const bits = [];
+    const put = (val, len) => { for (let i = len - 1; i >= 0; i--) bits.push((val >>> i) & 1); };
+    put(4, 4); put(bytes.length, ver < 10 ? 8 : 16); bytes.forEach(b => put(b, 8));
+    const cap = dataCodewords(ver) * 8;
+    put(0, Math.min(4, cap - bits.length));
+    put(0, (8 - bits.length % 8) % 8);
+    for (let pad = 0xEC; bits.length < cap; pad ^= 0xEC ^ 0x11) put(pad, 8);
+    const data = [];
+    for (let i = 0; i < bits.length; i += 8) { let b = 0; for (let j = 0; j < 8; j++) b = (b << 1) | bits[i + j]; data.push(b); }
+    // ECC + interleave
+    const nb = BLK_M[ver], eccLen = ECC_M[ver], raw = Math.floor(rawModules(ver) / 8);
+    const nShort = nb - raw % nb, shortLen = Math.floor(raw / nb);
+    const div = rsDivisor(eccLen), blocks = [];
+    for (let i = 0, k = 0; i < nb; i++) {
+      const dat = data.slice(k, k + shortLen - eccLen + (i < nShort ? 0 : 1)); k += dat.length;
+      const ecc = rsRemainder(dat, div);
+      if (i < nShort) dat.push(0);
+      blocks.push(dat.concat(ecc));
+    }
+    const all = [];
+    for (let i = 0; i < blocks[0].length; i++) blocks.forEach((b, j) => { if (i !== shortLen - eccLen || j >= nShort) all.push(b[i]); });
+
+    // Matrix
+    const size = ver * 4 + 17;
+    const mod = Array.from({ length: size }, () => new Array(size).fill(false));
+    const fn = Array.from({ length: size }, () => new Array(size).fill(false));
+    const setF = (x, y, d) => { mod[y][x] = d; fn[y][x] = true; };
+    for (let i = 0; i < size; i++) { setF(6, i, i % 2 === 0); setF(i, 6, i % 2 === 0); }
+    const finder = (cx, cy) => { for (let dy = -4; dy <= 4; dy++) for (let dx = -4; dx <= 4; dx++) { const x = cx + dx, y = cy + dy; if (x >= 0 && x < size && y >= 0 && y < size) { const d = Math.max(Math.abs(dx), Math.abs(dy)); setF(x, y, d !== 2 && d !== 4); } } };
+    finder(3, 3); finder(size - 4, 3); finder(3, size - 4);
+    const ap = alignPos(ver, size), last = ap.length - 1;
+    ap.forEach((a, i) => ap.forEach((b, j) => {
+      if ((i === 0 && j === 0) || (i === 0 && j === last) || (i === last && j === 0)) return;
+      for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) setF(a + dx, b + dy, Math.max(Math.abs(dx), Math.abs(dy)) !== 1);
+    }));
+    const drawFormat = mask => {
+      const d = (FORMAT_ECL_M << 3) | mask; let r = d;
+      for (let i = 0; i < 10; i++) r = (r << 1) ^ ((r >>> 9) * 0x537);
+      const b = ((d << 10) | r) ^ 0x5412, bit = i => ((b >>> i) & 1) !== 0;
+      for (let i = 0; i <= 5; i++) setF(8, i, bit(i));
+      setF(8, 7, bit(6)); setF(8, 8, bit(7)); setF(7, 8, bit(8));
+      for (let i = 9; i < 15; i++) setF(14 - i, 8, bit(i));
+      for (let i = 0; i < 8; i++) setF(size - 1 - i, 8, bit(i));
+      for (let i = 8; i < 15; i++) setF(8, size - 15 + i, bit(i));
+      setF(8, size - 8, true);
+    };
+    drawFormat(0);
+    if (ver >= 7) {
+      let r = ver; for (let i = 0; i < 12; i++) r = (r << 1) ^ ((r >>> 11) * 0x1F25);
+      const b = (ver << 12) | r;
+      for (let i = 0; i < 18; i++) { const d = ((b >>> i) & 1) !== 0, a = size - 11 + i % 3, c = Math.floor(i / 3); setF(a, c, d); setF(c, a, d); }
+    }
+    // Place codewords
+    let idx = 0;
+    for (let right = size - 1; right >= 1; right -= 2) {
+      if (right === 6) right = 5;
+      for (let vert = 0; vert < size; vert++) for (let j = 0; j < 2; j++) {
+        const x = right - j, up = ((right + 1) & 2) === 0, y = up ? size - 1 - vert : vert;
+        if (!fn[y][x] && idx < all.length * 8) { mod[y][x] = ((all[idx >>> 3] >>> (7 - (idx & 7))) & 1) !== 0; idx++; }
+      }
+    }
+    // Masking
+    const maskFn = [
+      (x, y) => (x + y) % 2 === 0, (x, y) => y % 2 === 0, (x) => x % 3 === 0, (x, y) => (x + y) % 3 === 0,
+      (x, y) => (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0, (x, y) => x * y % 2 + x * y % 3 === 0,
+      (x, y) => (x * y % 2 + x * y % 3) % 2 === 0, (x, y) => ((x + y) % 2 + x * y % 3) % 2 === 0];
+    const applyMask = m => { for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) if (!fn[y][x] && maskFn[m](x, y)) mod[y][x] = !mod[y][x]; };
+    const penalty = () => {
+      let p = 0, dark = 0;
+      for (let y = 0; y < size; y++) for (let pass = 0; pass < 2; pass++) {
+        let run = 1;
+        for (let x = 1; x < size; x++) {
+          const a = pass ? mod[x][y] : mod[y][x], b = pass ? mod[x - 1][y] : mod[y][x - 1];
+          if (a === b) { run++; if (run === 5) p += 3; else if (run > 5) p++; } else run = 1;
+        }
+      }
+      for (let y = 0; y < size - 1; y++) for (let x = 0; x < size - 1; x++) { const c = mod[y][x]; if (c === mod[y][x + 1] && c === mod[y + 1][x] && c === mod[y + 1][x + 1]) p += 3; }
+      for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) if (mod[y][x]) dark++;
+      const total = size * size; p += (Math.ceil(Math.abs(dark * 20 - total * 10) / total) - 1) * 10;
+      return p;
+    };
+    let best = 0, bestP = Infinity;
+    for (let m = 0; m < 8; m++) { applyMask(m); drawFormat(m); const pp = penalty(); if (pp < bestP) { bestP = pp; best = m; } applyMask(m); }
+    applyMask(best); drawFormat(best);
+    return { size, modules: mod, version: ver };
+  }
+
+  function toSVG(text, opts) {
+    opts = opts || {};
+    const q = encode(text), border = opts.border == null ? 4 : opts.border, n = q.size + border * 2;
+    const dark = opts.dark || '#111111', light = opts.light || '#ffffff';
+    let path = '';
+    for (let y = 0; y < q.size; y++) for (let x = 0; x < q.size; x++) if (q.modules[y][x]) path += `M${x + border},${y + border}h1v1h-1z`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges" role="img" aria-label="QR code"><rect width="100%" height="100%" fill="${light}"/><path d="${path}" fill="${dark}"/></svg>`;
+  }
+
+  const api = { encode, toSVG };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.QR = api;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+/* 3) LIVE RELAY CLIENT (MQTT over WebSocket, embedded) */
+/* Tiny MQTT 3.1.1 over WebSocket client (QoS 0) */
+function MiniMQTT(url, clientId, onMsg, onState){
+  const enc=new TextEncoder(), dec=new TextDecoder();
+  let ws, ping, subs=[], alive=false, retry=0, closed=false;
+  const len=n=>{const o=[];do{let d=n%128;n=Math.floor(n/128);if(n>0)d|=128;o.push(d)}while(n>0);return o};
+  const str=s=>{const b=enc.encode(s);return [b.length>>8,b.length&255,...b]};
+  const pkt=(h,body)=>new Uint8Array([h,...len(body.length),...body]);
+  function send(p){if(ws&&ws.readyState===1)ws.send(p)}
+  function connect(){
+    onState('connecting');
+    try{ws=new WebSocket(url,['mqtt'])}catch(e){return later()}
+    ws.binaryType='arraybuffer';
+    ws.onopen=()=>{send(pkt(0x10,[...str('MQTT'),4,0x02,0,60,...str(clientId)]))};
+    let buf=new Uint8Array(0);
+    ws.onmessage=e=>{
+      const d=new Uint8Array(e.data),n=new Uint8Array(buf.length+d.length);n.set(buf);n.set(d,buf.length);buf=n;
+      while(buf.length>=2){
+        let m=1,v=0,i=1,b;do{b=buf[i++];v+=(b&127)*m;m*=128}while(b&128&&i<buf.length);
+        if(buf.length<i+v)break;
+        const t=buf[0]>>4,body=buf.slice(i,i+v);buf=buf.slice(i+v);
+        if(t===2){alive=true;retry=0;onState('online');subs.forEach(doSub);clearInterval(ping);ping=setInterval(()=>send(new Uint8Array([0xC0,0])),30000)}
+        else if(t===3){const tl=(body[0]<<8)|body[1];const topic=dec.decode(body.slice(2,2+tl));let p=2+tl;if((buf[0]>>1&3)>0)p+=2;onMsg(topic,dec.decode(body.slice(p)))}
+      }
+    };
+    ws.onclose=()=>{alive=false;clearInterval(ping);onState('offline');if(!closed)later()};
+    ws.onerror=()=>{try{ws.close()}catch(_){}};
+  }
+  function later(){setTimeout(connect,Math.min(10000,1000*++retry))}
+  let pid=1;function doSub(t){send(pkt(0x82,[0,(pid++)&255||1,...str(t),0]))}
+  connect();
+  return{
+    subscribe(t){subs.push(t);if(alive)doSub(t)},
+    publish(t,m){if(!alive)return false;send(pkt(0x30,[...str(t),...enc.encode(m)]));return true},
+    get online(){return alive},
+    close(){closed=true;try{ws.close()}catch(_){}}
+  };
+}
+
+</script>
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const L = i => String.fromCharCode(65 + i);
+const LS = { get(k){ try { return JSON.parse(localStorage.getItem('hwro2_'+k)); } catch(_) { return null; } }, set(k,v){ try { localStorage.setItem('hwro2_'+k, JSON.stringify(v)); } catch(_) {} } };
+const rid = n => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => 'abcdefghjkmnpqrstuvwxyz23456789'[b % 31]).join('');
+const params = new URLSearchParams(location.search);
+let TK = CONFIG.tracks[params.get('t')] ? params.get('t') : (params.has('vote') ? 'pc' : (CONFIG.tracks[params.get('track')] ? params.get('track') : (CONFIG.tracks[LS.get('track')] ? LS.get('track') : 'pc')));
+let Q = CONFIG.tracks[TK].questions;
+const LV = k => CONFIG.levers[k] || '';
+document.querySelectorAll('.wsT').forEach(e => e.textContent = CONFIG.workshop);
+document.querySelectorAll('.wsS').forEach(e => e.textContent = CONFIG.subtitle);
+
+/* ---------- shared transport: MQTT (phones on any network) + BroadcastChannel (same-PC tabs) ---------- */
+function transport(room, onMsg, onState) {
+  const pre = 'hwro/' + room + '/';
+  const mq = MiniMQTT(params.get('broker') || CONFIG.broker, 'hw' + rid(10), (t, m) => { try { onMsg(t.slice(pre.length), JSON.parse(m)); } catch(_) {} }, onState);
+  let bc = null; try { bc = new BroadcastChannel('hwro-' + room); bc.onmessage = e => onMsg(e.data.t, e.data.m); } catch(_) {}
+  return {
+    sub: t => mq.subscribe(pre + t),
+    pub: (t, m) => { if (bc) bc.postMessage({ t, m }); return mq.publish(pre + t, JSON.stringify(m)); },
+    get online() { return mq.online; }
+  };
+}
+
+/* ---------- option helpers ---------- */
+const OI = q => q.options.length;
+const optsOf = q => q.options.concat([CONFIG.otherLabel]);
+const normV = v => v == null ? null : (typeof v === 'number' ? { o: [v], t: '' } : (typeof v.o === 'number' ? Object.assign({}, v, { o: [v.o] }) : v));
+
+/* =====================================================================
+   EMBEDDED AI WRITING ASSISTANT
+   Built-in engine (offline, on every phone): fixes spelling, plant
+   abbreviations, acronyms, capitalisation, punctuation and sentences.
+   Optional: presenter can connect an Azure OpenAI / OpenAI-compatible model
+   (AI settings) for full generative rewriting on the main screen.
+   ===================================================================== */
+const AI = (() => {
+  const ACR = new Set('dcs sis esd plc scada hmi apc mpc ot kpi roi hse dcu fcc rfcc cdu vdu hcu ccr nhdt mov psv prv sop moc rca pha hazop lopa sil iow ai ml opm tcu cmms erp lims fgs bms vfd mcc lpg lng h2s co2 nox sox ppm rto oee mtbf mttr pdm cbm p&id f&g bpcs pid ptw lopc'.split(' '));
+  const MAP = { pls:'please', plz:'please', u:'you', ur:'your', r:'are', bcz:'because', bcoz:'because', becoz:'because', coz:'because', cuz:'because', abt:'about', thru:'through', wrt:'with respect to', approx:'approximately',
+    eqp:'equipment', eqpt:'equipment', equip:'equipment', equipments:'equipment', maint:'maintenance', mntc:'maintenance', maintanance:'maintenance', maintainance:'maintenance', maintenence:'maintenance', maintenace:'maintenance',
+    ops:'operations', opr:'operator', oprs:'operators', optr:'operator', optrs:'operators', instr:'instrument', instru:'instrument', instrumnet:'instrument', instrumnts:'instruments', xmtr:'transmitter', xmtrs:'transmitters', xmitter:'transmitter', transmiter:'transmitter',
+    alram:'alarm', alrams:'alarms', allarm:'alarm', allarms:'alarms', shutdwon:'shutdown', shudown:'shutdown', shtdown:'shutdown', recieve:'receive', recieved:'received', occurance:'occurrence', occured:'occurred', seperate:'separate', teh:'the', becuase:'because', beacuse:'because',
+    opertor:'operator', oprator:'operator', operater:'operator', operaters:'operators', compresor:'compressor', exchager:'exchanger', efficency:'efficiency', effeciency:'efficiency', effciency:'efficiency', frequntly:'frequently', frequenly:'frequently', availble:'available',
+    proccess:'process', procces:'process', prosess:'process', sytem:'system', systme:'system', catlyst:'catalyst', catalist:'catalyst', regenration:'regeneration', regeneraton:'regeneration', changover:'changeover', planing:'planning', shedule:'schedule', schedual:'schedule',
+    dont:'do not', cant:'cannot', wont:'will not', isnt:'is not', doesnt:'does not', didnt:'did not', arent:'are not', im:'I am', ive:'I have', i:'I', info:'information', mgmt:'management', dept:'department', reqd:'required', hrs:'hours', mins:'minutes',
+    temp:'temperature', temps:'temperatures', govt:'government', diff:'difference', qty:'quantity', prob:'problem', probs:'problems', issu:'issue', isue:'issue', isues:'issues', etc:'etc.', btw:'between', yr:'year', yrs:'years', regen:'regeneration', cv:'control valve', cvs:'control valves', till:'until', hv:'have', bcos:'because', ppl:'people', b4:'before', asap:'as soon as possible', avg:'average', shft:'shift', wil:'will', shud:'should', wud:'would', cud:'could', alot:'a lot', becaus:'because', sensr:'sensor', sensers:'sensors', vlv:'valve', pmp:'pump', htr:'heater', drm:'drum' };
+  const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const FILL = /\b(basically|actually|you know|u know|kind of|sort of|just)\b\s*/gi;
+  function polish(raw) {
+    let s = String(raw || '').replace(/[\u0000-\u001f\u007f]+/g, ' ').replace(/\s+/g, ' ').trim();
+    if (!s) return '';
+    const letters = s.replace(/[^A-Za-z]/g, ''), up = s.replace(/[^A-Z]/g, '');
+    if (letters.length > 8 && up.length / letters.length > 0.6) s = s.toLowerCase();
+    s = s.replace(/\bs\/d\b/gi, 'shutdown').replace(/\bt\/a\b/gi, 'turnaround').replace(/\bw\/o\b/gi, 'without').replace(/\bw\/\s?/gi, 'with ')
+         .replace(/\s&\s/g, ' and ').replace(/\s\+\s/g, ' and ').replace(/\be\.?g\.?(?=\s|,|$)/gi, 'e.g.').replace(/\bi\.?e\.?(?=\s|,|$)/gi, 'i.e.')
+         .replace(FILL, '').replace(/\b(etc\.?\s*){2,}/gi, 'etc. ');
+    s = s.replace(/[A-Za-z][A-Za-z0-9&']*/g, w => {
+      const lw = w.toLowerCase().replace(/'/g, ''), base = lw.endsWith('s') && ACR.has(lw.slice(0, -1)) ? lw.slice(0, -1) : null;
+      if (ACR.has(lw)) return lw.toUpperCase();
+      if (base) return base.toUpperCase() + 's';
+      if (has(MAP, lw)) return MAP[lw];
+      return w;
+    });
+    s = s.replace(/\b(\w+)(\s+\1\b)+/gi, '$1')
+         .replace(/\s+([,.;:!?])/g, '$1').replace(/([!?])\1+/g, '$1').replace(/\.{2,}/g, '.').replace(/,{2,}/g, ',')
+         .replace(/([,;:!?])(?=[A-Za-z])/g, '$1 ').replace(/\.(?=[A-Za-z]{2})/g, '. ').replace(/\s{2,}/g, ' ').trim();
+    s = s.replace(/\be\.g\./g, 'e\u0002g\u0002').replace(/\bi\.e\./g, 'i\u0002e\u0002').replace(/\betc\.(?=\s+[a-z])/g, 'etc\u0002');
+    const parts = s.replace(/([.!?])\s+/g, '$1\u0001').split(/\s*(?:\u0001|;|\s-\s|\s\/\s)\s*/).map(x => x.trim().replace(/^[-–•*,.]+\s*/, '')).filter(Boolean);
+    return parts.map(p => { p = p.charAt(0).toUpperCase() + p.slice(1); p = p.replace(/\u0002/g, '.'); return /[.!?]$/.test(p) ? p : p + '.'; }).join(' ').slice(0, 400);
+  }
+  const cfg = () => { try { return JSON.parse(localStorage.getItem('hwro2_ai')) || {}; } catch (_) { return {}; } };
+  const ready = () => { const c = cfg(); return !!(c.endpoint && c.key); };
+  async function rewrite(texts, context) {
+    const c = cfg(); if (!c.endpoint || !c.key || !texts.length) return null;
+    const az = /azure|cognitiveservices/i.test(c.endpoint) && !/chat\/completions/.test(c.endpoint);
+    const url = az ? `${c.endpoint.replace(/\/+$/, '')}/openai/deployments/${encodeURIComponent(c.model || 'gpt-4o-mini')}/chat/completions?api-version=2024-06-01` : c.endpoint;
+    const headers = { 'Content-Type': 'application/json' }; if (az || /azure/i.test(c.endpoint)) headers['api-key'] = c.key; else headers.Authorization = 'Bearer ' + c.key;
+    const body = { temperature: 0.2, messages: [
+      { role: 'system', content: 'You are an editor for a Honeywell process-automation customer workshop in an oil & gas / refinery / petrochemical setting. Rewrite each plant survey response into ONE clear, concise, professional sentence (max 30 words). Correct spelling and grammar, expand informal abbreviations, keep technical terms and acronyms (DCS, SIS, DCU, etc.). Preserve the original meaning exactly; never add new facts. Reply ONLY with a JSON array of strings in the same order.' },
+      { role: 'user', content: `Survey question: ${context}\nResponses:\n${JSON.stringify(texts)}` }] };
+    if (!az) body.model = c.model || 'gpt-4o-mini';
+    const r = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
+    if (!r.ok) throw new Error('AI service returned ' + r.status);
+    const j = await r.json(), txt = j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content || '';
+    const arr = JSON.parse((txt.match(/\[[\s\S]*\]/) || ['[]'])[0]);
+    return Array.isArray(arr) && arr.length === texts.length ? arr.map(x => String(x).trim().slice(0, 400)) : null;
+  }
+  return { polish, rewrite, ready, cfg };
+})();
+
+if (params.has('vote')) phone(); else projector();
+
+/* =====================================================================
+   PROJECTOR
+   ===================================================================== */
+function projector() {
+  $('P').classList.remove('hidden');
+  if (params.has('present')) document.body.classList.add('present');
+  let room = params.get('room') || LS.get('room'); if (!room) room = rid(6); LS.set('room', room);
+  const KEY = k => 'state_' + room + '_' + k;
+  const ST = {}; Object.keys(CONFIG.tracks).forEach(k => ST[k] = LS.get(KEY(k)) || { ballots: {}, people: {} });
+  let st = ST[TK];
+  let cur = 0, view = 'one', qrMode = 'all', auto = null, prevTot = {};
+  const save = () => { LS.set(KEY(TK), st); try { autoSave(); } catch (_) {} };
+
+  const tr = transport(room, (topic, m) => {
+    if (topic !== 'vote' || !m || typeof m.d !== 'string') return;
+    const k = CONFIG.tracks[m.k] ? m.k : 'pc', QQ = CONFIG.tracks[k].questions, S = ST[k];
+    const q = QQ.find(x => x.id === Number(m.q)); if (!q) return;
+    let o = [...new Set((Array.isArray(m.o) ? m.o : [m.o]).map(Number))].filter(i => Number.isInteger(i) && i >= 0 && i <= OI(q)).sort((a, b) => a - b);
+    if (!q.multi) o = o.slice(0, 1);
+    const t = o.includes(OI(q)) ? String(m.t || '').replace(/\s+/g, ' ').trim().slice(0, 300) : '';
+    if (!o.length || (o.includes(OI(q)) && !t)) return;
+    const dev = m.d.slice(0, 40), dp = String(m.dp || 'Not specified').slice(0, 60);
+    S.people[dev] = { dp, n: String(m.n || '').slice(0, 60) };
+    (S.ballots[dev] = S.ballots[dev] || {})[q.id] = { o, t, tp: t ? AI.polish(t) : '', ai: '', dp, ts: Date.now() };
+    LS.set(KEY(k), S); tr.pub('ack/' + dev, { id: m.id }); autoSave();
+    toast(`${CONFIG.tracks[k].name} · Q${q.id} · ${dp}${t ? ' · “Other” comment' : ''}`); if (k === TK) render(); else return;
+    if (t && AI.ready()) queueAI();
+  }, s => {
+    $('conn').classList.toggle('off', s !== 'online');
+    try { NET.relay = s === 'online'; renderNet(); } catch (_) { setTimeout(() => { try { NET.relay = s === 'online'; renderNet(); } catch (_) {} }, 0); }
+    $('connT').textContent = s === 'online' ? 'Live' : s === 'connecting' ? 'Connecting…' : 'Offline – retrying';
+  });
+  tr.sub('vote');
+
+  function results() {
+    const out = Q.map(q => {
+      const labels = optsOf(q), c = labels.map(() => 0), dd = labels.map(() => ({})), others = [];
+      let total = 0;
+      for (const [dev, b] of Object.entries(st.ballots)) {
+        const v = normV(b[q.id]); if (!v || !v.o || !v.o.length) continue; total++;
+        v.o.forEach(i => { if (i >= 0 && i < labels.length) { c[i]++; dd[i][v.dp] = (dd[i][v.dp] || 0) + 1; } });
+        if (v.t) others.push({ dev, t: v.t, text: v.ai || v.tp || AI.polish(v.t), gen: !!v.ai, dp: v.dp, n: (st.people[dev] || {}).n || '', ts: v.ts || 0 });
+      }
+      const top = labels.map((label, i) => ({ i, label, v: c[i], pct: total ? Math.round(c[i] * 1000 / total) / 10 : 0, lead: Object.entries(dd[i]).sort((a, b) => b[1] - a[1])[0] }))
+        .filter(t => t.v > 0).sort((a, b) => b.v - a.v || a.i - b.i);
+      others.sort((a, b) => b.ts - a.ts);
+      return { total, c, top, dd, others };
+    });
+    const dep = {}; Object.values(st.people).forEach(p => dep[p.dp] = (dep[p.dp] || 0) + 1);
+    return { qs: out, people: Object.keys(st.people).length, votes: out.reduce((a, r) => a + r.total, 0), dep: Object.entries(dep).sort((a, b) => b[1] - a[1]) };
+  }
+
+  /* base URL used in QR codes */
+  /* ---------- automatic network detection ---------- */
+  const NET = { mode: 'scan', ip: '', lan: '', launcher: '', relay: false };
+  const isLH = h => /^(localhost|127\.\d+\.\d+\.\d+|\[::1\]|::1)$/.test(h);
+  const isPrivate = ip => /^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(ip);
+  const isLocal = !/^https?:$/.test(location.protocol);
+
+  // 1) Ask the launcher (if running) for the laptop's Wi-Fi address — JSONP works from file:// too
+  function probeLauncher(port) {
+    return new Promise(res => {
+      const cb = '__hwro' + port + '_' + Date.now(), sc = document.createElement('script');
+      const done = v => { delete window[cb]; sc.remove(); clearTimeout(t); res(v); };
+      window[cb] = info => done(info && info.ip ? info : null);
+      sc.onerror = () => done(null);
+      const t = setTimeout(() => done(null), 1500);
+      sc.src = `http://127.0.0.1:${port}/hwro-info.js?cb=${cb}`;
+      document.head.appendChild(sc);
+    });
+  }
+  async function findLauncher() {
+    if (/^https?:$/.test(location.protocol) && !isLH(location.hostname)) return null;
+    const ports = [];
+    if (isLH(location.hostname) && location.port) ports.push(+location.port);
+    for (let p = 8080; p <= 8090; p++) if (!ports.includes(p)) ports.push(p);
+    const r = await Promise.all(ports.map(probeLauncher));
+    return r.find(Boolean) || null;
+  }
+  // 2) Browser-side IP discovery via WebRTC (works on many corporate builds; mDNS-hidden on others)
+  function webrtcIP() {
+    return new Promise(res => {
+      let pc, found = '';
+      try { pc = new RTCPeerConnection({ iceServers: [] }); } catch (_) { return res(''); }
+      const fin = () => { try { pc.close(); } catch (_) {} res(found); };
+      pc.onicecandidate = e => {
+        if (!e.candidate) return fin();
+        const m = /(\d{1,3}(?:\.\d{1,3}){3})/.exec(e.candidate.candidate || '');
+        if (m && isPrivate(m[1]) && !found) found = m[1];
+      };
+      try { pc.createDataChannel('x'); pc.createOffer().then(o => pc.setLocalDescription(o)).catch(fin); } catch (_) { fin(); }
+      setTimeout(fin, 2000);
+    });
+  }
+
+  async function detectNetwork(silent) {
+    if (!silent) { NET.mode = 'scan'; renderNet(); }
+    const before = NET.lan;
+    if (/^https?:$/.test(location.protocol) && !isLH(location.hostname)) {
+      NET.mode = 'hosted'; NET.lan = location.origin + location.pathname; NET.ip = location.hostname;
+    } else {
+      const info = await findLauncher();
+      if (info) {
+        NET.mode = 'launcher'; NET.ip = info.ip; NET.launcher = info.port;
+        NET.lan = `http://${info.ip}:${info.port}/`;
+      } else {
+        NET.launcher = ''; NET.ip = NET.ip || await webrtcIP();
+        const manual = LS.get('hostedUrl') || (CONFIG.voteUrl || '').trim().split('?')[0];
+        NET.mode = manual ? 'manual' : 'none'; NET.lan = manual || '';
+      }
+    }
+    renderNet(); if (before !== NET.lan || !silent) renderQR();
+  }
+  // keep watching: picks up the launcher / network change automatically
+  setInterval(() => { if (NET.mode !== 'hosted') detectNetwork(true); }, 6000);
+  window.addEventListener('online', () => detectNetwork(true));
+
+  function renderNet() {
+    const chip = (ok, t) => `<span class="nchip ${ok === true ? 'nok' : ok === false ? 'nbad' : ''}">${t}</span>`;
+    const where = { hosted: 'Hosted web link', launcher: `Wi-Fi ${NET.ip}`, manual: 'Manual link', none: NET.ip ? `Wi-Fi ${NET.ip} (launcher off)` : 'Not detected', scan: 'Detecting…' }[NET.mode];
+    $('netS').innerHTML = chip(NET.mode === 'scan' ? null : !!NET.lan, '📶 ' + where) + chip(NET.relay ? true : null, NET.relay ? 'Votes relay online' : 'Relay connecting…');
+  }
+
+  function baseUrl() { return NET.lan; }
+  const voteUrl = q => { const b = baseUrl(); return b ? `${b}${b.includes('?') ? '&' : '?'}vote=1&t=${TK}&room=${room}${q ? '&q=' + q : ''}${params.get('broker') ? '&broker=' + encodeURIComponent(params.get('broker')) : ''}` : ''; };
+
+  function renderQR() {
+    const q = Q[cur], url = voteUrl(qrMode === 'one' ? q.id : 0);
+    $('qrT').textContent = qrMode === 'one' ? `Vote on Question ${q.id}` : 'Join the live poll';
+    $('qrH').textContent = qrMode === 'one' ? 'Opens this question directly' : `${CONFIG.tracks[TK].name} session · ${Q.length} questions · about 5 minutes`;
+    $('qrW').classList.add('hidden');
+    $('bLink').classList.toggle('hidden', !(isLocal || isLH(location.hostname)) || NET.mode === 'launcher');
+    if (NET.mode === 'scan' && !url) {
+      $('qrTools').classList.add('hidden'); $('qrU').textContent = 'Session: ' + room;
+      $('qrB').innerHTML = '<div class="setup" style="align-items:center;text-align:center"><span class="spin"></span><b>Detecting network…</b><span>Generating your QR code automatically</span></div>';
+      return;
+    }
+    if (!url) {
+      $('qrTools').classList.add('hidden');
+      $('qrU').textContent = 'Session: ' + room;
+      $('qrB').innerHTML = `<form class="setup" id="fUrl"><b>Add your public link once</b><span>For voting from <b>any network</b> (mobile data, guest or plant Wi-Fi), paste the https:// address where this file is hosted. The QR is generated instantly and remembered.</span><input id="iUrl" type="url" placeholder="https://…/Resilient_Operations_Live_Voting.html" aria-label="Hosted link" required><button class="btn bp" type="submit">Show QR code</button><span id="eUrl" style="color:var(--red-d)"></span></form>`;
+      $('fUrl').addEventListener('submit', e => { e.preventDefault(); const u = $('iUrl').value.trim(); if (!/^https?:\/\/\S+$/.test(u)) { $('eUrl').textContent = 'Please enter a full link starting with https://'; return; } LS.set('hostedUrl', u.split('?')[0]); detectNetwork(); });
+      return;
+    }
+    $('qrTools').classList.remove('hidden');
+    $('qrB').innerHTML = QR.toSVG(url, { border: 2, dark: '#0E1726' });
+    $('qrU').textContent = url.replace(/^https?:\/\//, '');
+  }
+  $('bLink').onclick = () => { LS.set('hostedUrl', null); CONFIG.voteUrl = ''; detectNetwork(); };
+  $('bSaveQR').onclick = () => {
+    const url = voteUrl(qrMode === 'one' ? Q[cur].id : 0); if (!url) return;
+    const svg = QR.toSVG(url, { border: 4 }), img = new Image();
+    img.onload = () => { const c = document.createElement('canvas'); c.width = c.height = 1024; const x = c.getContext('2d'); x.imageSmoothingEnabled = false; x.drawImage(img, 0, 0, 1024, 1024);
+      const a = document.createElement('a'); a.href = c.toDataURL('image/png'); a.download = qrMode === 'one' ? `QR_Question_${Q[cur].id}.png` : 'QR_Live_Poll.png'; a.click(); };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  };
+
+  function render() {
+    const R = results();
+    $('sP').textContent = R.people; $('sV').textContent = R.votes;
+    const T = CONFIG.tracks[TK];
+    $('sess').innerHTML = `<div class="th">${esc(T.day)}</div><h3>${esc(T.name)} session</h3><div class="cu">${esc(T.customers)}</div><div class="mut" style="font-size:13px;margin-top:6px">${Q.length} questions · ${R.people} participant${R.people === 1 ? '' : 's'} · ${R.dep.length} department${R.dep.length === 1 ? '' : 's'}</div>${view === 'one' ? `<div class="lv"><div class="mut" style="font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">Value lever explored</div><span class="lvb">◆ ${esc(LV(Q[cur].lever))}</span></div>` : ''}<div class="lv" id="saveS"></div>`;
+    renderSave();
+    document.querySelectorAll('.vtab').forEach(b => b.classList.toggle('on', b.dataset.v === view));
+    $('deptV').classList.toggle('hidden', view !== 'dept'); $('valV').classList.toggle('hidden', view !== 'value');
+    if (view === 'dept') {
+      $('dvS').textContent = `${T.name} · ${T.customers}`;
+      const list = deptRows(), mx = Math.max(1, ...list.map(x => x[1].p));
+      const avg = R.people ? Math.round(R.votes / R.people * 10) / 10 : 0;
+      $('dK').innerHTML = [[R.people, 'Participants'], [list.length, 'Departments'], [R.votes, 'Answers submitted'], [avg + ' / ' + Q.length, 'Avg. answered per person']].map(([v, l]) => `<div class="kp"><b>${v}</b><span>${l}</span></div>`).join('');
+      $('dT2').innerHTML = list.length ? list.map(([n, r]) => `<tr><td><b>${esc(n)}</b><div class="mini"><div style="width:${r.p / mx * 100}%"></div></div></td><td class="n">${r.p}</td><td class="n">${r.a}</td><td class="n">${r.o}</td></tr>`).join('') : '<tr><td colspan="4" class="mut" style="text-align:center;padding:24px">Waiting for the first participant…</td></tr>';
+    }
+    if (view === 'value') { $('valV').innerHTML = valueHTML(R, true); $('valV').querySelectorAll('[data-q]').forEach(b => b.onclick = () => go(Q.findIndex(q => q.id === +b.dataset.q))); }
+    document.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', view === 'one' && c.dataset.i === String(cur)));
+    $('one').classList.toggle('hidden', view !== 'one'); $('all').classList.toggle('hidden', view !== 'all');
+    if (view === 'dept' || view === 'value') return;
+    if (view === 'all') {
+      const col = ['var(--gold)', 'var(--silver)', 'var(--bronze)'];
+      $('sum').innerHTML = Q.map((q, i) => { const r = R.qs[i];
+        return `<div class="sc" data-i="${i}"><div class="th" style="font-size:10.5px">Q${q.id} · ${esc(q.theme)}</div><p>${esc(q.text)}</p>${r.total ? r.top.slice(0, 3).map((t, k) => `<div class="sl"><i style="background:${col[k]}">${k + 1}</i><span title="${esc(t.label)}">${esc(t.label)}</span><b>${t.pct}%</b></div>`).join('') : '<div class="mut" style="font-size:13px">No votes yet</div>'}<div class="mut" style="margin-top:8px;font-size:11.5px">${r.total} respondent${r.total === 1 ? '' : 's'}${r.others.length ? ` · ${r.others.length} “Other” comment${r.others.length === 1 ? '' : 's'}` : ''}</div></div>`; }).join('');
+      $('sum').querySelectorAll('.sc').forEach(c => c.onclick = () => go(+c.dataset.i));
+      return;
+    }
+    const q = Q[cur], r = R.qs[cur];
+    $('qN').textContent = 'Q' + q.id; $('qTh').textContent = `${q.theme} · Question ${cur + 1} of ${Q.length}`; $('qT').textContent = q.text; $('qTot').textContent = r.total; $('qLv').textContent = LV(q.lever);
+    $('qHp').textContent = [q.multi ? 'Multiple answers allowed – percentages show the share of respondents selecting each option.' : '', q.hint || ''].filter(Boolean).join(' ');
+    const bump = prevTot[q.id] !== undefined && prevTot[q.id] !== r.total; prevTot[q.id] = r.total;
+    $('podW').innerHTML = !r.total ? '<div class="wait"><b style="color:var(--ink);font-size:18px">Waiting for votes…</b><br>Scan the QR code to submit your answer. The top 3 answers will appear here live.</div>'
+      : `<div class="pod">${r.top.slice(0, 3).map((t, k) => `<div class="pc r${k + 1}${bump && !k ? ' bump' : ''}"><div class="rk"><span class="md">${k + 1}</span>${['Top answer', 'Second', 'Third'][k]} · Option ${L(t.i)}</div><h3>${esc(t.label)}</h3><div class="pct">${t.pct}%<small>${t.v} of ${r.total}</small></div><div class="bar"><div style="width:${t.pct}%"></div></div><div class="ld">${t.lead ? `Strongest support: <b>${esc(t.lead[0])}</b> (${t.lead[1]})` : 'No votes yet'}</div></div>`).join('')}</div>`;
+    const mx = Math.max(1, ...r.c);
+    $('dist').innerHTML = optsOf(q).map((o, i) => `<div class="dr"><span class="l">${L(i)}</span><div><div>${esc(o)}</div><div class="bar"><div style="width:${r.c[i] / mx * 100}%"></div></div></div><span class="n">${r.c[i]} · ${r.total ? Math.round(r.c[i] * 1000 / r.total) / 10 : 0}%</span></div>`).join('');
+    $('othL').innerHTML = r.others.length
+      ? `<div class="ol">${r.others.map(o => `<div class="oi"><p>${esc(o.text)}</p><div class="m"><span class="aitag">✨ ${o.gen ? 'AI rewrite' : 'AI refined'}</span><span>${esc(o.dp)}${o.n ? ' · ' + esc(o.n) : ''}</span></div>${o.text !== o.t ? `<details><summary>Original wording</summary>${esc(o.t)}</details>` : ''}</div>`).join('')}</div>`
+      : '<div class="oe">No “Other” responses yet. Comments typed by participants appear here, rewritten professionally.</div>';
+  }
+
+  let aiT = null, aiBusy = false;
+  function queueAI() { clearTimeout(aiT); aiT = setTimeout(() => runAI(true), 1500); }
+  async function runAI(silent) {
+    if (aiBusy) return;
+    if (!AI.ready()) { if (!silent) toast('Built-in AI is active. Add a model in “AI settings” for generative rewriting.'); render(); return; }
+    aiBusy = true; $('bAI').textContent = '✨ Refining…';
+    let n = 0;
+    try {
+      for (const q of Q) {
+        const items = Object.entries(st.ballots).map(([dev, b]) => ({ dev, v: normV(b[q.id]) })).filter(x => x.v && x.v.t && (!x.v.ai || !silent));
+        if (!items.length) continue;
+        for (let i = 0; i < items.length; i += 15) {
+          const chunk = items.slice(i, i + 15), out = await AI.rewrite(chunk.map(x => x.v.t), q.text);
+          if (out) chunk.forEach((x, k) => { if (out[k]) { st.ballots[x.dev][q.id] = Object.assign({}, x.v, { ai: out[k] }); n++; } });
+        }
+      }
+      save(); if (!silent) toast(`AI rewrote ${n} comment${n === 1 ? '' : 's'}`);
+    } catch (e) { toast('AI service unavailable – showing built-in refinement'); }
+    aiBusy = false; $('bAI').textContent = '✨ Refine with AI'; render();
+  }
+  $('bAI').onclick = () => runAI(false);
+  $('bAIset').onclick = () => {
+    const c = AI.cfg();
+    const ep = prompt('AI model endpoint (optional)\n\n• Azure OpenAI: https://<resource>.openai.azure.com\n• OpenAI-compatible: full …/v1/chat/completions URL\n\nLeave empty to use the built-in AI only.', c.endpoint || '');
+    if (ep === null) return;
+    if (!ep.trim()) { localStorage.removeItem('hwro2_ai'); toast('Using built-in AI'); return; }
+    const key = prompt('API key (stored only on this laptop, never sent to phones):', c.key || ''); if (key === null) return;
+    const model = prompt('Deployment / model name:', c.model || 'gpt-4o-mini'); if (model === null) return;
+    try { localStorage.setItem('hwro2_ai', JSON.stringify({ endpoint: ep.trim(), key: key.trim(), model: model.trim() })); } catch (_) {}
+    toast('AI model connected'); runAI(false);
+  };
+
+  /* ---------- department rows ---------- */
+  function deptRows(S) {
+    S = S || st; const rows = {};
+    Object.entries(S.people).forEach(([dev, p]) => { const r = rows[p.dp] = rows[p.dp] || { p: 0, a: 0, o: 0 }; r.p++; Object.values(S.ballots[dev] || {}).forEach(v => { r.a++; if (normV(v).t) r.o++; }); });
+    return Object.entries(rows).sort((x, y) => y[1].p - x[1].p || y[1].a - x[1].a);
+  }
+
+  /* ---------- DYNAMIC VALUE FRAMEWORK (driven by live answers) ---------- */
+  const VF = [
+    ['prod', true, [['Increased Throughput', 'Operating closer to constraints', 1], ['Unplanned Downtime Reduction', 'Fewer trips & shutdowns', 2]]],
+    ['value', true, [['Yield Improvement', 'More higher-value products', 4], ['Quality Improvement', 'Tighter specification control', 5]]],
+    ['energy', false, [['Energy Optimization', 'Consumption & efficiency monitoring', 6]]],
+    ['om', false, [['Preventive Maintenance', 'Maintenance deferral', 9], ['Corrective Maintenance Reduction', 'Secondary damage reduction', 7]]],
+    ['people', false, [['Workforce Efficiency', 'Improved labour productivity', 12]]],
+    ['safety', false, [['People Safety', 'Plant and personnel protection', 13]]]];
+  const PILOT = ['prod', 'value', 'energy', 'om'];          // option order of the "Path Forward" question
+  function valueHTML(R, live) {
+    const rq = id => { const i = Q.findIndex(q => q.id === id); return i < 0 ? null : { q: Q[i], r: R.qs[i] }; };
+    const topOf = x => x && x.r.top[0] ? x.r.top[0] : null;
+    const lastQ = Q[Q.length - 1], lastR = R.qs[Q.length - 1];
+    const pr = {}; PILOT.forEach((k, i) => pr[k] = lastR.total ? Math.round(lastR.c[i] * 100 / lastR.total) : null);
+    const best = lastR.total ? PILOT.slice().sort((a, b) => pr[b] - pr[a])[0] : null;
+    const eng = k => { const qs = Q.map((q, i) => [q, R.qs[i]]).filter(([q]) => q.lever === k); return qs.reduce((a, [, r]) => a + r.total, 0); };
+    const tl = (id) => { const t = topOf(rq(id)); return t ? `${esc(t.label)} <small class="mut">(${t.pct}%)</small>` : '<span class="mut">Awaiting responses</span>'; };
+    const ai = rq(14), aiT = topOf(ai);
+    const kpis = `<div class="vfk">
+      <div><span>Respondents</span><b>${R.people}</b></div>
+      <div><span>#1 pilot priority</span><b>${best ? esc(LV(best)) + ` · ${pr[best]}%` : '—'}</b></div>
+      <div><span>Top downtime cause</span><b>${tl(2)}</b></div>
+      <div><span>AI readiness</span><b>${aiT ? esc(aiT.label.split('–')[0].trim()) + ` · ${aiT.pct}%` : '—'}</b></div></div>`;
+    const rows = VF.map(([k, rv, drv]) => {
+      const qs = Q.filter(q => q.lever === k).map(q => live ? `<button type="button" data-q="${q.id}">Q${q.id}</button>` : `<span>Q${q.id}</span>`).join('');
+      const p = pr[k], meter = p != null ? `<div class="pr">Pilot priority ${p}%<div class="bar"><i style="width:${p}%"></i></div></div>` : `<div class="pr">${eng(k)} answers collected</div>`;
+      const d = drv.map(([h, t, id]) => { const x = rq(id), tp = topOf(x);
+        return `<div class="vd"><div class="h"><b>${esc(h)}</b> – ${esc(t)}</div>${tp ? `<div class="live"><div class="bar"><i style="width:${tp.pct}%"></i></div><b>${tp.pct}%</b><span title="${esc(tp.label)}">Q${id} · ${esc(tp.label)}</span></div>` : `<div class="wait">Q${id} · awaiting responses</div>`}</div>`; }).join('');
+      return `<div class="vrow"><div class="vlev${rv ? ' rv' : ''}${k === best ? ' hot' : ''}">${k === best ? '<span class="crown">#1 priority</span>' : ''}${esc(LV(k))}${meter}<div class="qs">${qs}</div></div><div class="vdrv">${d}</div></div>`;
+    }).join('');
+    return `<div class="th">Value framework · live</div><h2 class="qt" style="font-size:26px;margin-bottom:0">Autonomous operations improve plant margin through key value levers</h2>${kpis}
+      <div class="vf2"><div class="vh">Outcome</div><div class="vh">P&amp;L</div><div class="vh" style="display:grid;grid-template-columns:${live ? 210 : 180}px 1fr;gap:10px"><span>Value levers</span><span>Value drivers · top customer answer</span></div>
+      <div class="vout"><div>Plant Margin<small>(EBITDA)</small></div></div>
+      <div class="vpl"><div class="rv">Revenue</div><div class="oc">Operating Cost</div></div>
+      <div class="vrows">${rows}</div></div>
+      <div class="vnote">Pilot priority = share of respondents choosing each lever in Q${lastQ.id}. Driver bars show the most-selected answer for the linked question.${live ? ' Click a Q-tag to open its live results.' : ''} Framework source: Resilient Operations Kuwait.</div>`;
+  }
+
+  /* ---------- SAVING: browser storage + backup file + auto-save file ---------- */
+  let fileH = null, lastSave = null, lastBackup = LS.get('lastBackup');
+  const snapshot = () => ({ app: 'honeywell-resilient-ops', version: 2, room, savedAt: new Date().toISOString(), workshop: CONFIG.workshop, tracks: Object.fromEntries(Object.keys(CONFIG.tracks).map(k => [k, ST[k]])) });
+  const stamp = () => new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-');
+  function download(name, text, type) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+  function backup(silent) { download(`resilient-operations-responses-${stamp()}.json`, JSON.stringify(snapshot(), null, 1), 'application/json'); lastBackup = Date.now(); LS.set('lastBackup', lastBackup); if (!silent) toast('Backup file downloaded'); renderSave(); }
+  let asT = null;
+  function autoSave() { lastSave = Date.now(); if (!fileH) { renderSaveSafe(); return; } clearTimeout(asT); asT = setTimeout(async () => { try { const w = await fileH.createWritable(); await w.write(JSON.stringify(snapshot(), null, 1)); await w.close(); lastBackup = Date.now(); LS.set('lastBackup', lastBackup); } catch (e) { fileH = null; toast('Auto-save file unavailable – use Save backup'); } renderSaveSafe(); }, 800); }
+  function renderSaveSafe() { try { renderSave(); } catch (_) {} }
+  function renderSave() {
+    const el = document.getElementById('saveS'); if (!el) return;
+    const tm = t => t ? new Date(t).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '—';
+    const n = Object.keys(CONFIG.tracks).reduce((a, k) => a + Object.keys(ST[k].ballots).length, 0);
+    el.innerHTML = `<div class="mut" style="font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">Response storage</div>
+      <div class="svs"><b>✔ Saved automatically</b> in this browser (${n} respondent record${n === 1 ? '' : 's'}, both sessions).<br>${fileH ? `<b>✔ Auto-saving to file</b> ${esc(fileH.name)} · ${tm(lastBackup)}` : `Last backup file: ${tm(lastBackup)}`}</div>
+      <div class="svb adm"><button type="button" class="btn bg" id="bBk">⬇ Save backup</button><button type="button" class="btn bg" id="bAs">${fileH ? 'Auto-save on' : '⟳ Auto-save to file'}</button><button type="button" class="btn bg" id="bRs">⬆ Restore</button></div>`;
+    $('bBk').onclick = () => backup(false);
+    $('bRs').onclick = restore;
+    $('bAs').onclick = async () => {
+      if (!window.showSaveFilePicker) { toast('Auto-save to file needs Chrome or Edge – use Save backup instead'); return; }
+      try { fileH = await showSaveFilePicker({ suggestedName: `resilient-operations-responses-${stamp()}.json`, types: [{ description: 'Workshop responses', accept: { 'application/json': ['.json'] } }] }); autoSave(); toast('Every new response is now saved to ' + fileH.name); }
+      catch (_) {}
+    };
+  }
+  function restore() {
+    const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.json,application/json';
+    inp.onchange = () => { const f = inp.files[0]; if (!f) return; const rd = new FileReader();
+      rd.onload = () => { try {
+        const d = JSON.parse(rd.result); if (!d || !d.tracks) throw 0; let n = 0;
+        Object.keys(CONFIG.tracks).forEach(k => { const src = d.tracks[k]; if (!src) return;
+          Object.assign(ST[k].people, src.people || {});
+          Object.entries(src.ballots || {}).forEach(([dev, b]) => { ST[k].ballots[dev] = Object.assign(ST[k].ballots[dev] || {}, b); n++; });
+          LS.set(KEY(k), ST[k]); });
+        st = ST[TK]; toast(`Restored ${n} respondent record${n === 1 ? '' : 's'}`); render();
+      } catch (_) { toast('This file is not a valid workshop backup'); } };
+      rd.readAsText(f); };
+    inp.click();
+  }
+  window.addEventListener('beforeunload', e => { if (lastSave && (!lastBackup || lastSave > lastBackup) && !fileH) { e.preventDefault(); e.returnValue = ''; } });
+
+  /* ---------- PROFESSIONAL PDF REPORT ---------- */
+  function buildReport() {
+    const T = CONFIG.tracks[TK], R = results(), dl = deptRows(), now = new Date();
+    const date = now.toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' });
+    const tops = Q.map((q, i) => { const t = R.qs[i].top[0]; return `<tr><td class="n" style="text-align:left">Q${q.id}</td><td><b>${esc(q.theme)}</b><div class="mut" style="font-size:11px">${esc(LV(q.lever))}</div></td><td>${t ? esc(t.label) : '<span class="mut">No responses</span>'}</td><td class="n">${t ? t.pct + '%' : '—'}</td><td class="n">${R.qs[i].total}</td></tr>`; }).join('');
+    const dept = dl.length ? dl.map(([n, r]) => `<tr><td>${esc(n)}</td><td class="n">${r.p}</td><td class="n">${r.a}</td><td class="n">${r.o}</td></tr>`).join('') : '<tr><td colspan="4" class="mut">No participants yet</td></tr>';
+    const detail = Q.map((q, i) => { const r = R.qs[i], mx = Math.max(1, ...r.c), topI = r.top[0] ? r.top[0].i : -1;
+      return `<div class="rqq"><div class="t">Q${q.id} · ${esc(q.theme)} · ${esc(LV(q.lever))}</div><h3>${esc(q.text)}</h3><div class="s">${r.total} respondent${r.total === 1 ? '' : 's'} · ${q.multi ? 'multiple answers allowed (percent of respondents)' : 'single answer'}${q.hint ? ' · ' + esc(q.hint) : ''}</div>
+        ${optsOf(q).map((o, j) => { const p = r.total ? Math.round(r.c[j] * 1000 / r.total) / 10 : 0; return `<div class="rbr${j === topI ? ' top' : ''}"><span class="l">${L(j)}</span><span>${esc(o)}</span><div class="bar"><i style="width:${r.c[j] / mx * 100}%"></i></div><span class="n">${r.c[j]} · ${p}%</span></div>`; }).join('')}
+        ${r.others.length ? `<div class="roth"><b>“Other” responses (professionally refined)</b><ul>${r.others.map(o => `<li>${esc(o.text)} <em>— ${esc(o.dp)}</em></li>`).join('')}</ul></div>` : ''}</div>`; }).join('');
+    const avg = R.people ? Math.round(R.votes / R.people * 10) / 10 : 0;
+    $('rpB').innerHTML = `
+      <div class="rcv"><span class="logo"><b>Honeywell</b><small>Technologies</small></span><div><div class="th">${esc(T.day)} · Workshop report</div><h1>${esc(CONFIG.workshop)}</h1><div class="meta"><b>${esc(T.name)} session</b> · ${esc(T.customers)} · ${esc(date)}</div></div><div class="conf">Customer confidential<br>${esc(CONFIG.subtitle)}</div></div>
+      <section class="rsec"><h2 class="rh">Executive summary</h2>
+        <div class="rkpi"><div><b>${R.people}</b><span>Participants</span></div><div><b>${dl.length}</b><span>Departments</span></div><div><b>${R.votes}</b><span>Answers</span></div><div><b>${avg}</b><span>Avg. answers / person</span></div></div>
+        <table class="rtab"><thead><tr><th>#</th><th>Topic</th><th>Top customer answer</th><th style="text-align:right">Share</th><th style="text-align:right">n</th></tr></thead><tbody>${tops}</tbody></table></section>
+      <section class="rsec rpb">${valueHTML(R, false)}</section>
+      <section class="rsec"><h2 class="rh">Participation by department</h2><table class="rtab"><thead><tr><th>Department</th><th style="text-align:right">Participants</th><th style="text-align:right">Answers</th><th style="text-align:right">“Other” comments</th></tr></thead><tbody>${dept}</tbody></table></section>
+      <section class="rsec rpb"><h2 class="rh">Detailed results by question</h2>${detail}</section>
+      <div class="rfoot"><span>Generated ${esc(now.toLocaleString())} · Honeywell live workshop poll</span><span>© Honeywell International Inc. · Customer confidential</span></div>`;
+  }
+  $('bPdf').onclick = () => { buildReport(); $('P').classList.add('hidden'); $('RP').classList.remove('hidden'); window.scrollTo(0, 0); };
+  $('bRBack').onclick = () => { $('RP').classList.add('hidden'); $('P').classList.remove('hidden'); render(); };
+  $('bRPrint').onclick = () => { const t = document.title; document.title = `Resilient Operations – ${CONFIG.tracks[TK].name} workshop report`; print(); setTimeout(() => document.title = t, 1000); };
+
+  function go(i) { cur = Math.max(0, i); view = 'one'; renderQR(); render(); }
+  function chipsInit() { $('chips').innerHTML = Q.map((q, i) => `<button type="button" class="chip" data-i="${i}">Q${q.id}</button>`).join(''); }
+  function setTrack(k) {
+    if (!CONFIG.tracks[k]) return; TK = k; LS.set('track', k); Q = CONFIG.tracks[k].questions; st = ST[k]; prevTot = {};
+    document.querySelectorAll('.ttab').forEach(b => { b.classList.toggle('on', b.dataset.k === k); b.setAttribute('aria-selected', b.dataset.k === k); });
+    chipsInit(); go(Math.min(cur, Q.length - 1));
+  }
+  $('tTabs').innerHTML = Object.entries(CONFIG.tracks).map(([k, t]) => `<button type="button" role="tab" class="ttab" data-k="${k}"><b>${esc(t.name)}</b><span>${esc(t.customers)} · ${esc(t.day.split('·').pop().trim())}</span></button>`).join('');
+  $('tTabs').onclick = e => { const b = e.target.closest('.ttab'); if (b && b.dataset.k !== TK) setTrack(b.dataset.k); };
+  $('vTabs').onclick = e => { const b = e.target.closest('.vtab'); if (!b) return; if (b.dataset.v === 'one') go(cur); else { view = b.dataset.v; render(); } };
+  function setAll() { view = 'all'; render(); }
+  function toggleAuto() { if (auto) { clearInterval(auto); auto = null; } else auto = setInterval(() => go((cur + 1) % Q.length), 12000); $('bAuto').classList.toggle('on', !!auto); $('bAuto').textContent = auto ? 'Auto-rotate: On' : 'Auto-rotate'; }
+  let tt; function toast(m) { $('toastT').textContent = m; $('toast').classList.add('show'); clearTimeout(tt); tt = setTimeout(() => $('toast').classList.remove('show'), 2400); }
+
+
+  $('chips').onclick = e => { const b = e.target.closest('.chip'); if (b) b.dataset.i === 'all' ? setAll() : go(+b.dataset.i); };
+  document.querySelectorAll('[data-m]').forEach(b => b.onclick = () => { qrMode = b.dataset.m; document.querySelectorAll('[data-m]').forEach(x => x.classList.toggle('on', x === b)); renderQR(); });
+  $('bPrev').onclick = () => go((cur - 1 + Q.length) % Q.length);
+  $('bNext').onclick = () => go((cur + 1) % Q.length);
+  $('bAuto').onclick = toggleAuto;
+  $('bFull').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {});
+  $('bCsv').onclick = () => {
+    const R = results(), rows = [['Question #', 'Theme', 'Question', 'Rank', 'Answer', 'Respondents', '% of respondents', 'Department split']];
+    Q.forEach((q, i) => R.qs[i].top.forEach((t, k) => rows.push([q.id, q.theme, q.text, k + 1, t.label, t.v, t.pct + '%', Object.entries(R.qs[i].dd[t.i]).map(([d, n]) => `${d}: ${n}`).join('; ')])));
+    rows.push([], ['"OTHER" RESPONSES'], ['Question #', 'Theme', 'Department', 'Name', 'Refined response', 'Original wording']);
+    Q.forEach((q, i) => R.qs[i].others.forEach(o => rows.push([q.id, q.theme, o.dp, o.n, o.text, o.t])));
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\r\n')], { type: 'text/csv' }));
+    a.download = `resilient-operations-${CONFIG.tracks[TK].name.toLowerCase()}-results-${new Date().toISOString().slice(0, 10)}.csv`; a.click();
+  };
+  $('bReset').onclick = () => {
+    const k = prompt('Start a NEW session? A backup file of all responses is downloaded first, then votes are cleared and a new QR code is created.\n\nEnter admin key:');
+    if (k === null) return; if (k !== ADMIN_KEY) return toast('Incorrect admin key');
+    backup(true); lastSave = null;
+    LS.set('room', rid(6)); const u = new URL(location.href); u.searchParams.delete('room'); location.href = u.toString();
+  };
+  const SAMPLE = ['frequent xmtr drift in hydrogen unit, wrong readings &  nobody knows till lab results', 'no proper handover btw shifts new oprs dont know old issues', 'compressor vibration high before trip but no alarm in dcs', 'MANUAL LOGGING TAKES TOO MUCH TIME DURING UPSET', 'cv sticking in fcc, s/d last yr bcz of this', 'need better planning for drier regen, manpower not availble'];
+  $('bDemo').onclick = () => {
+    if (!confirm('Add 20 sample votes to preview the dashboard? (Use Reset before the real session.)')) return;
+    const D = CONFIG.departments.slice(0, 6);
+    for (let d = 0; d < 20; d++) { const dev = 'demo-' + rid(6); st.people[dev] = { dp: D[d % D.length], n: '' }; st.ballots[dev] = {};
+      Q.forEach(q => {
+        const p = [0.7, 0.5, 0.35, 0.25].sort(() => Math.random() - 0.5);
+        let o = q.multi ? [0, 1, 2, 3].filter(i => Math.random() < p[i]) : [Math.min(3, Math.floor(Math.random() * Math.random() * 4))];
+        if (!o.length) o = [Math.floor(Math.random() * 4)];
+        let t = '';
+        if (Math.random() < 0.18) { t = SAMPLE[Math.floor(Math.random() * SAMPLE.length)]; o = q.multi ? o.concat(OI(q)) : [OI(q)]; }
+        st.ballots[dev][q.id] = { o, t, tp: t ? AI.polish(t) : '', ai: '', dp: D[d % D.length], ts: Date.now() - d };
+      }); }
+    save(); render(); toast('20 sample participants added');
+  };
+  $('bSheet').onclick = () => {
+    if (!baseUrl()) { toast('Enter the hosted link in the QR panel first'); return; }
+    $('P').classList.add('hidden'); $('S').classList.remove('hidden');
+    const all = voteUrl(0);
+    $('sg').innerHTML = `<div class="tile big"><div class="q">${QR.toSVG(all, { border: 2 })}</div><div><div class="th">All questions</div><h2 style="margin:6px 0">Join the live poll</h2><p>${CONFIG.tracks[TK].name} session · ${Q.length} questions · about 5 minutes · results appear live on the main screen</p></div></div>` +
+      Q.map(q => `<div class="tile"><div class="th">Question ${q.id} · ${esc(q.theme)}</div><div class="q">${QR.toSVG(voteUrl(q.id), { border: 2 })}</div><p>${esc(q.text)}</p></div>`).join('');
+  };
+  $('bBack').onclick = () => { $('S').classList.add('hidden'); $('P').classList.remove('hidden'); };
+  document.addEventListener('keydown', e => {
+    if (e.target.matches('input,textarea,select') || !$('S').classList.contains('hidden') || !$('RP').classList.contains('hidden')) return;
+    const k = e.key.toLowerCase();
+    if (e.key === 'ArrowRight') $('bNext').click(); else if (e.key === 'ArrowLeft') $('bPrev').click();
+    else if (k === 'f') $('bFull').click(); else if (k === 'a') toggleAuto(); else if (k === 's') view === 'all' ? go(cur) : setAll();
+    else if (/^[1-9]$/.test(e.key) && +e.key <= Q.length) go(+e.key - 1);
+  });
+  window.addEventListener('storage', e => { if (e.key === 'hwro2_' + KEY(TK)) { st = ST[TK] = LS.get(KEY(TK)) || st; render(); } });
+  const tick = () => $('clk').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  tick(); setInterval(tick, 10000);
+  setTrack(TK); detectNetwork();
+}
+
+/* =====================================================================
+   PHONE VOTING
+   ===================================================================== */
+function phone() {
+  $('V').classList.remove('hidden');
+  $('vSess').textContent = `${CONFIG.tracks[TK].name} session · ${CONFIG.tracks[TK].customers}`;
+  const room = (params.get('room') || '').replace(/[^a-z0-9]/gi, '').slice(0, 12);
+  const only = Number(params.get('q')) || null;
+  if (!room) { $('vW').innerHTML = '<p style="text-align:center">This voting link is incomplete. Please scan the QR code on the main screen again.</p>'; return; }
+  let dev = LS.get('device'); if (!dev) { dev = rid(12); LS.set('device', dev); }
+  let prof = LS.get('profile'), ans = LS.get('ans_' + room + TK) || {}, list = only ? Q.filter(q => q.id === only) : Q, idx = 0, sel = [], busy = false;
+  if (!list.length) list = Q;
+  const waiters = {};
+  const tr = transport(room, (t, m) => { if (t === 'ack/' + dev && m && waiters[m.id]) { waiters[m.id](); delete waiters[m.id]; } }, s => {
+    $('vConn').classList.toggle('off', s !== 'online'); $('vConnT').textContent = s === 'online' ? 'Live poll' : 'Connecting…';
+  });
+  tr.sub('ack/' + dev);
+  const show = id => ['vW', 'vQ', 'vD'].forEach(s => $(s).classList.toggle('hidden', s !== id));
+
+  CONFIG.departments.forEach(d => { const o = document.createElement('option'); o.textContent = d; $('dpt').appendChild(o); });
+  if (prof) { $('dpt').value = prof.dp; $('nm').value = prof.n || ''; }
+  $('fJ').addEventListener('submit', e => { e.preventDefault(); if (!$('dpt').value) { $('jE').textContent = 'Please select your department.'; return; } prof = { dp: $('dpt').value, n: $('nm').value.trim() }; LS.set('profile', prof); start(); });
+
+  function start() { idx = only ? 0 : Math.max(0, list.findIndex(q => ans[q.id] === undefined)); renderQ(); show('vQ'); }
+  function renderQ() {
+    const q = list[idx], prev = normV(ans[q.id]);
+    sel = prev ? prev.o.slice() : []; $('othT').value = prev && prev.t ? prev.t : '';
+    $('pT').textContent = only ? `Question ${q.id}` : `Question ${idx + 1} of ${list.length}`;
+    const p = Math.round(idx / list.length * 100); $('pP').textContent = p + '%'; $('pB').style.width = p + '%';
+    $('vTh').textContent = LV(q.lever) + ' · ' + q.theme; $('vT').textContent = q.text; $('vE').textContent = '';
+    $('vMh').innerHTML = q.multi ? '<span class="mh">Select all that apply</span>' : '<span class="mh">Select one</span>';
+    $('vHint').textContent = q.hint || ''; $('vHint').classList.toggle('hidden', !q.hint);
+    $('opts').setAttribute('role', q.multi ? 'group' : 'radiogroup'); $('opts').innerHTML = '';
+    optsOf(q).forEach((o, i) => {
+      const b = document.createElement('button'); b.type = 'button';
+      b.className = 'opt' + (q.multi ? ' multi' : '') + (i === OI(q) ? ' oth' : '');
+      b.setAttribute('role', q.multi ? 'checkbox' : 'radio');
+      b.innerHTML = '<span class="l"></span><span></span>'; b.lastChild.textContent = o;
+      b.onclick = () => {
+        if (q.multi) sel = sel.includes(i) ? sel.filter(x => x !== i) : sel.concat(i); else sel = [i];
+        paint(q); if (i === OI(q) && sel.includes(i)) setTimeout(() => $('othT').focus(), 50);
+      };
+      $('opts').appendChild(b);
+    });
+    paint(q); preview();
+    $('bS').textContent = idx === list.length - 1 ? 'Submit & finish' : 'Submit & next →';
+    $('bB').textContent = idx === 0 ? '‹ Profile' : '‹ Back'; window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function paint(q) {
+    [...$('opts').children].forEach((x, j) => { const on = sel.includes(j); x.classList.toggle('sel', on); x.setAttribute('aria-checked', on); x.firstChild.textContent = on ? '✓' : L(j); });
+    $('othW').classList.toggle('hidden', !sel.includes(OI(q))); valid();
+  }
+  function valid() {
+    const q = list[idx], needT = sel.includes(OI(q)), t = $('othT').value.trim();
+    $('bS').disabled = !sel.length || (needT && t.length < 2); return !$('bS').disabled;
+  }
+  let pvT;
+  function preview() {
+    const t = $('othT').value; $('othC').textContent = t.length + ' / 300';
+    const pt = AI.polish(t); $('othPT').textContent = pt; $('othP').classList.toggle('hidden', t.trim().length < 2);
+  }
+  $('othT').addEventListener('input', () => { valid(); $('othC').textContent = $('othT').value.length + ' / 300'; clearTimeout(pvT); pvT = setTimeout(preview, 350); });
+  $('bB').onclick = () => { if (idx === 0) show('vW'); else { idx--; renderQ(); } };
+
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  async function sendVote(q, o) {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      for (let w = 0; w < 30 && !tr.online; w++) await sleep(200);
+      const id = rid(8);
+      const ok = new Promise(r => { waiters[id] = () => r(true); setTimeout(() => r(false), 4000); });
+      tr.pub('vote', { k: TK, d: dev, q: q.id, o: o.o, t: o.t, dp: prof.dp, n: prof.n, id });
+      if (await ok) return true;
+    }
+    return false;
+  }
+  $('bS').onclick = async () => {
+    if (busy) return;
+    const q = list[idx];
+    if (!valid()) { $('vE').textContent = sel.includes(OI(q)) ? 'Please describe your “Other” answer.' : 'Please select an answer.'; return; }
+    busy = true; $('bS').disabled = true; $('vE').textContent = ''; $('bS').textContent = 'Sending…';
+    const a = { o: sel.slice().sort((x, y) => x - y), t: sel.includes(OI(q)) ? $('othT').value.replace(/\s+/g, ' ').trim().slice(0, 300) : '' };
+    if (await sendVote(q, a)) {
+      ans[q.id] = a; LS.set('ans_' + room + TK, ans);
+      $('flash').classList.add('show'); setTimeout(() => $('flash').classList.remove('show'), 1300);
+      if (idx < list.length - 1) { idx++; renderQ(); } else finish();
+    } else { $('vE').textContent = 'Could not reach the main screen. Please check your internet connection and tap Submit again.'; $('bS').disabled = false; $('bS').textContent = 'Try again'; }
+    busy = false;
+  };
+  function finish() {
+    $('dT').textContent = only ? 'Your answer is live on the main screen.' : 'All your answers are live on the main screen.';
+    $('dL').innerHTML = ''; Q.filter(q => ans[q.id] !== undefined).forEach(q => { const d = document.createElement('div'); d.innerHTML = '<b></b><span></span>'; d.firstChild.textContent = 'Q' + q.id; const v = normV(ans[q.id]); d.lastChild.textContent = v.o.map(i => i === OI(q) ? 'Other: ' + AI.polish(v.t) : L(i) + '. ' + q.options[i]).join(' · '); $('dL').appendChild(d); });
+    $('bR').textContent = only ? 'Answer all questions' : 'Review or change my answers'; show('vD');
+  }
+  $('bR').onclick = () => { if (only) { const u = new URL(location.href); u.searchParams.delete('q'); location.href = u.toString(); return; } idx = 0; renderQ(); show('vQ'); };
+  if (prof && prof.dp) start(); else show('vW');
+}
+})();
+
+</script>
+</body>
+</html>
